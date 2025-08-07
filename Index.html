@@ -1,0 +1,103 @@
+<!DOCTYPE html><html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MozVendas</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom right, #ffffff, #f0f0f0, #d0f0d0);
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      background-color: #fff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .title {
+      font-size: 20px;
+      font-weight: bold;
+      color: #333;
+    }
+    .container {
+      padding: 20px;
+    }
+    .stats {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .card {
+      flex: 1;
+      padding: 15px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .card h2 {
+      margin: 0;
+      font-size: 16px;
+      color: #666;
+    }
+    .card p {
+      font-size: 22px;
+      font-weight: bold;
+      margin: 5px 0 0;
+    }
+    .filter {
+      padding: 15px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .filter h3 {
+      margin-top: 0;
+      color: #333;
+    }
+    .filter button {
+      margin: 5px;
+      padding: 8px 15px;
+      border: none;
+      border-radius: 20px;
+      background-color: #d0f0d0;
+      color: #333;
+      cursor: pointer;
+    }
+    .filter button:hover {
+      background-color: #b0e0b0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="title">MozVendas</div>
+  </header>  <div class="container">
+    <div class="stats">
+      <div class="card">
+        <h2>Vendas do dia</h2>
+        <p style="color: green;">MZN 0</p>
+      </div>
+      <div class="card">
+        <h2>Total de vendas</h2>
+        <p>0</p>
+      </div>
+    </div><div class="filter">
+  <h3>Filtrar por período:</h3>
+  <button onclick="filtrar('hoje')">Hoje</button>
+  <button onclick="filtrar('ontem')">Ontem</button>
+  <button onclick="filtrar('7')">Últimos 7 dias</button>
+  <button onclick="filtrar('30')">Últimos 30 dias</button>
+  <button onclick="filtrar('sempre')">Sempre</button>
+</div>
+
+  </div>  <script>
+    function filtrar(periodo) {
+      alert("Filtrando por: " + periodo);
+      // Aqui você pode integrar com Firebase para buscar os dados reais com base no período
+    }
+  </script></body>
+</html>
