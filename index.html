@@ -1,312 +1,49 @@
-<!doctype html>
-
+html
+<!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>MozVendas — Dashboard (demo)</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
   <style>
-    :root{--bg:#0f1724;--card:#0b1220;--accent:#06b6d4;--muted:#94a3b8;--glass: rgba(255,255,255,0.03)}
-    *{box-sizing:border-box;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial}
-    body{margin:0;background:linear-gradient(180deg,#071028 0%, #071728 100%);color:#e6eef6;min-height:100vh}
-    .container{max-width:1100px;margin:20px auto;padding:18px}
-    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
-    .brand{display:flex;align-items:center;gap:12px}
-    .logo{width:44px;height:44px;background:var(--glass);display:grid;place-items:center;border-radius:10px;font-weight:700;color:var(--accent)}
-    .title{font-size:18px}.topbar{display:flex;gap:12px;align-items:center}
-.filter, .product-pill{background:var(--card);padding:8px 12px;border-radius:10px;cursor:pointer;border:1px solid rgba(255,255,255,0.03)}
-.filter:active, .product-pill:active{transform:translateY(1px)}
-
-.main{display:grid;grid-template-columns:1fr 340px;gap:16px}
-.card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
-
-/* products carousel */
-.products{display:flex;gap:10px;overflow:auto;padding:10px 4px}
-.product{min-width:160px;background:var(--glass);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);cursor:pointer}
-.product.selected{outline:3px solid rgba(6,182,212,0.12);box-shadow:0 6px 18px rgba(6,182,212,0.06)}
-
-/* stats */
-.stats{display:flex;gap:12px;margin-top:12px}
-.stat{flex:1;padding:12px;border-radius:10px;background:rgba(255,255,255,0.02);text-align:center}
-.stat .num{font-weight:700;font-size:20px}
-.muted{color:var(--muted);font-size:13px}
-
-/* dropdown */
-.dropdown{position:relative}
-.menu{position:absolute;right:0;top:calc(100% + 8px);background:var(--card);min-width:200px;border-radius:10px;padding:8px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 8px 24px rgba(2,6,23,0.6);display:none}
-.menu.show{display:block}
-.menu button{display:block;width:100%;padding:8px;border-radius:8px;border:none;background:transparent;color:inherit;text-align:left;cursor:pointer}
-.menu button:hover{background:rgba(255,255,255,0.02)}
-
-/* right column */
-.right .section{margin-bottom:12px}
-.list{max-height:320px;overflow:auto;padding-right:6px}
-.sale{display:flex;justify-content:space-between;padding:8px;border-radius:8px;margin-bottom:6px;background:rgba(255,255,255,0.01)}
-
-/* small screens */
-@media (max-width:900px){
-  .main{grid-template-columns:1fr;}
-  .right{order:2}
-}
-
-/* subtle scrollbar */
-.products::-webkit-scrollbar,.list::-webkit-scrollbar{height:8px;width:8px}
-.products::-webkit-scrollbar-thumb,.list::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.05);border-radius:8px}
-
-  </style>
-</head>
-<body>
-  <div class="container">
-    <header>
-      <div class="brand">
-        <div class="logo">MZ</div>
-        <div>
-          <div class="title">MozVendas — Dashboard</div>
-          <div class="muted">Area do vendedor</div>
-        </div>
-      </div><div class="topbar">
-    <div class="dropdown">
-      <div id="periodBtn" class="filter">Período: <strong id="periodLabel">Hoje</strong> ▾</div>
-      <div id="periodMenu" class="menu">
-        <button data-period="today">Hoje</button>
-        <button data-period="yesterday">Ontem</button>
-        <button data-period="7days">Últimos 7 dias</button>
-        <button data-period="30days">Últimos 30 dias</button>
-        <button data-period="always">Sempre</button>
-      </div>
-    </div>
-
-    <div id="productsBtn" class="filter">Produto: <strong id="productLabel">Todos</strong> ▾</div>
-  </div>
-</header>
-
-<div class="main">
-  <div>
-    <div class="card">
-      <h3>Produtos</h3>
-      <div class="products" id="products"></div>
-
-      <div class="stats">
-        <div class="stat">
-          <div class="muted">Vendas</div>
-          <div id="totalSales" class="num">0</div>
-        </div>
-        <div class="stat">
-          <div class="muted">Receita (MZN)</div>
-          <div id="totalAmount" class="num">0</div>
-        </div>
-        <div class="stat">
-          <div class="muted">Média (por venda)</div>
-          <div id="avgAmount" class="num">0</div>
-        </div>
-      </div>
-
-      <div style="margin-top:12px">
-        <small class="muted">Clique em um produto para filtrar. Use o filtro de período à direita para mudar intervalo.</small>
-      </div>
-    </div>
-
-    <div class="card" style="margin-top:12px">
-      <h3>Últimas vendas</h3>
-      <div id="salesList" class="list"></div>
-    </div>
-  </div>
-
-  <aside class="right">
-    <div class="card section">
-      <h4>Resumo rápido</h4>
-      <div style="display:flex;gap:10px;margin-top:8px">
-        <div class="product-pill">M-Pesa</div>
-        <div class="product-pill">E-Mola</div>
-        <div class="product-pill">Banco</div>
-      </div>
-    </div>
-
-    <div class="card section">
-      <h4>Detalhes do produto</h4>
-      <div id="productDetails">Selecione um produto para ver detalhes.</div>
-    </div>
-
-    <div class="card section">
-      <h4>Exportar</h4>
-      <div style="margin-top:8px"><button id="exportBtn" class="product-pill">Exportar CSV (demo)</button></div>
-    </div>
-  </aside>
-</div>
-
-  </div><script>
-/* ---------- Dados demo ----------
-   Substitua por leitura do Firestore para dados reais.
-   Exemplo de objeto de venda:
-   { id:'v1', productId:'p1', date:'2025-08-07T12:34:00Z', amount:350, method:'M-Pesa' }
-*/
-const PRODUCTS = [
-  {id:'all', name:'Todos', price:0},
-  {id:'p1', name:'Bolo Chocolate', price:350},
-  {id:'p2', name:'Bolo Leite Ninho', price:420},
-  {id:'p3', name:'Bolo Red Velvet', price:480},
-  {id:'p4', name:'Bolo Limão', price:300}
-];
-
-// Gera vendas demo nos últimos 40 dias
-function rand(min,max){return Math.floor(Math.random()*(max-min+1))+min}
-const SALES = (()=>{
-  const arr=[]; const now=new Date();
-  for(let i=0;i<120;i++){
-    const daysAgo=rand(0,40);
-    const d=new Date(now); d.setDate(now.getDate()-daysAgo);
-    d.setHours(rand(8,23),rand(0,59),rand(0,59));
-    const prod = PRODUCTS[rand(1,PRODUCTS.length-1)];
-    const amount = prod.price + rand(-40,90);
-    arr.push({id:'s'+i, productId:prod.id, date:d.toISOString(), amount, method: ['M-Pesa','E-Mola','Banco'][rand(0,2)]});
-  }
-  // ordem decrescente
-  return arr.sort((a,b)=> new Date(b.date)-new Date(a.date));
-})();
-
-/* ---------- UI Refs ----------*/
-const productsEl = document.getElementById('products');
-const salesListEl = document.getElementById('salesList');
-const totalSalesEl = document.getElementById('totalSales');
-const totalAmountEl = document.getElementById('totalAmount');
-const avgAmountEl = document.getElementById('avgAmount');
-const productDetailsEl = document.getElementById('productDetails');
-const periodBtn = document.getElementById('periodBtn');
-const periodMenu = document.getElementById('periodMenu');
-const periodLabel = document.getElementById('periodLabel');
-const productsBtn = document.getElementById('productsBtn');
-const productLabel = document.getElementById('productLabel');
-const exportBtn = document.getElementById('exportBtn');
-
-let selectedProduct = 'all';
-let selectedPeriod = 'today';
-
-/* ---------- Render products carousel ----------*/
-function renderProducts(){
-  productsEl.innerHTML='';
-  PRODUCTS.slice(1).forEach(p=>{
-    const div = document.createElement('div');
-    div.className='product'+(p.id===selectedProduct? ' selected':'');
-    div.innerHTML = `<strong>${p.name}</strong><div class="muted">Preço aprox. ${p.price} MZN</div>`;
-    div.addEventListener('click',()=>{
-      if(selectedProduct===p.id) selectedProduct='all'; else selectedProduct=p.id;
-      productLabel.textContent = selectedProduct==='all' ? 'Todos' : PRODUCTS.find(x=>x.id===selectedProduct).name;
-      renderProducts(); computeAndShow();
-    });
-    productsEl.appendChild(div);
-  });
-}
-
-/* ---------- Period dropdown handling ----------*/n
-periodBtn.addEventListener('click',()=>{ periodMenu.classList.toggle('show'); });
-periodMenu.addEventListener('click',(e)=>{
-  const btn = e.target.closest('button'); if(!btn) return; const period=btn.dataset.period;
-  selectedPeriod=period; periodMenu.classList.remove('show');
-  periodLabel.textContent = ({today:'Hoje', yesterday:'Ontem', '7days':'Últimos 7 dias', '30days':'Últimos 30 dias', always:'Sempre'})[period];
-  computeAndShow();
-});
-
-// clicking outside closes menu
-window.addEventListener('click', (e)=>{
-  if(!periodBtn.contains(e.target) && !periodMenu.contains(e.target)) periodMenu.classList.remove('show');
-});
-
-/* ---------- ProductsBtn open quick menu (same as product pill) ----------*/
-productsBtn.addEventListener('click',()=>{
-  // simples: foca no carousel (mobile) — ou abrir modal
-  productsEl.scrollTo({left:0,behavior:'smooth'});
-});
-
-/* ---------- Compute totals based on filters ----------*/
-function filterByPeriod(items){
-  const now=new Date();
-  function startOfDay(d){ const x=new Date(d); x.setHours(0,0,0,0); return x }
-  function endOfDay(d){ const x=new Date(d); x.setHours(23,59,59,999); return x }
-  if(selectedPeriod==='always') return items;
-  if(selectedPeriod==='today'){
-    const s=startOfDay(now), e=endOfDay(now);
-    return items.filter(it=> new Date(it.date) >= s && new Date(it.date) <= e);
-  }
-  if(selectedPeriod==='yesterday'){
-    const y=new Date(now); y.setDate(now.getDate()-1);
-    const s=startOfDay(y), e=endOfDay(y);
-    return items.filter(it=> new Date(it.date) >= s && new Date(it.date) <= e);
-  }
-  if(selectedPeriod==='7days'){
-    const s=new Date(now); s.setDate(now.getDate()-6); s.setHours(0,0,0,0);
-    const e=endOfDay(now);
-    return items.filter(it=> new Date(it.date) >= s && new Date(it.date) <= e);
-  }
-  if(selectedPeriod==='30days'){
-    const s=new Date(now); s.setDate(now.getDate()-29); s.setHours(0,0,0,0);
-    const e=endOfDay(now);
-    return items.filter(it=> new Date(it.date) >= s && new Date(it.date) <= e);
-  }
-  return items;
-}
-
-function computeAndShow(){
-  let items = SALES.slice();
-  if(selectedProduct!=='all') items = items.filter(s=> s.productId===selectedProduct);
-  items = filterByPeriod(items);
-
-  const totalSales = items.length;
-  const totalAmount = items.reduce((s,x)=>s + x.amount,0);
-  const avg = totalSales ? Math.round(totalAmount/totalSales) : 0;
-
-  totalSalesEl.textContent = totalSales;
-  totalAmountEl.textContent = totalAmount.toLocaleString();
-  avgAmountEl.textContent = avg.toLocaleString();
-
-  // vendas list
-  salesListEl.innerHTML='';
-  if(items.length===0) salesListEl.innerHTML = '<div class="muted">Nenhuma venda nesse período / filtro.</div>';
-  items.slice(0,50).forEach(s=>{
-    const p = PRODUCTS.find(x=>x.id===s.productId) || {name:'-' };
-    const d = new Date(s.date);
-    const div = document.createElement('div'); div.className='sale';
-    div.innerHTML = `<div>
-        <div style="font-weight:600">${p.name}</div>
-        <div class="muted" style="font-size:12px">${d.toLocaleString()} • ${s.method}</div>
-      </div>
-      <div style="text-align:right">
-        <div style="font-weight:700">${s.amount.toLocaleString()} MZN</div>
-      </div>`;
-    salesListEl.appendChild(div);
-  });
-
-  // product details
-  if(selectedProduct==='all'){
-    productDetailsEl.innerHTML = '<div class="muted">Todos os produtos selecionados. Clique em um produto para ver detalhes.</div>';
-  } else {
-    const prod = PRODUCTS.find(x=>x.id===selectedProduct);
-    const sold = SALES.filter(x=>x.productId===selectedProduct);
-    const soldFiltered = filterByPeriod(sold);
-    const tot = soldFiltered.reduce((s,x)=>s+x.amount,0);
-    productDetailsEl.innerHTML = `<strong>${prod.name}</strong><div class="muted" style="margin-top:6px">Vendas nesse filtro: ${soldFiltered.length}</div><div class="muted">Receita: ${tot.toLocaleString()} MZN</div>`;
-  }
-}
-
-/* ---------- Export CSV (demo) ----------*/
-exportBtn.addEventListener('click', ()=>{
-  let items = SALES.slice(); if(selectedProduct!=='all') items = items.filter(s=>s.productId===selectedProduct); items = filterByPeriod(items);
-  if(items.length===0){ alert('Nenhuma venda para exportar neste filtro.'); return }
-  const rows = [['id','produto','data','valor','meio']];
-  items.forEach(it=> rows.push([it.id, (PRODUCTS.find(p=>p.id===it.productId)||{name:''}).name, it.date, it.amount, it.method]));
-  const csv = rows.map(r=> r.map(cell=> '"'+String(cell).replace(/"/g,'""')+'"').join(',')).join('\n');
-  const blob = new Blob([csv], {type:'text/csv'}); const url = URL.createObjectURL(blob);
-  const a = document.createElement('a'); a.href = url; a.download = `vendas_${selectedProduct}_${selectedPeriod}.csv`; document.body.appendChild(a); a.click(); a.remove();
-});
-
-/* ---------- Inicialização ----------*/
-renderProducts(); computeAndShow();
-
-/* ---------- Onde integrar com Firebase ----------
-  - Substitua a constante SALES por leitura do Firestore:
-      db.collection('sales').where('sellerId','==',uid).get()... map para o formato usado acima
-  - Substitua PRODUCTS por leitura da coleção 'products'
-  - Chame computeAndShow() quando os dados chegarem
-  - Se quiser atualizações em tempo real, use onSnapshot() e atualize arrays
-*/
-</script></body>
-</html>
+    body {
+      background-color: #0d120d;
+      color: white;
+      font-family: sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .top-bar div {
+      font-size: 24px;
+      cursor: pointer;
+    }
+    h1 {
+      font-size: 32px;
+      margin-top: 20px;
+    }
+    .buttons {
+      display: flex;
+      gap: 10px;
+      margin: 20px 0;
+    }
+    .buttons button {
+      border: 2px solid white;
+      border-radius: 25px;
+      background: none;
+      color: white;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .card {
+      background-color: #1f2b1f;
+      padding: 20px;
+      border-radius: 15px;
+      margin-bottom: 15px;
+    }
+    .card:first-child {
