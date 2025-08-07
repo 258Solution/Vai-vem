@@ -1,103 +1,83 @@
 <!DOCTYPE html><html lang="pt">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MozVendas</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MozVendas - Plataforma</title>
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to bottom right, #ffffff, #f0f0f0, #d0f0d0);
-    }
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 20px;
-      background-color: #fff;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-    .title {
-      font-size: 20px;
-      font-weight: bold;
-      color: #333;
-    }
-    .container {
-      padding: 20px;
-    }
-    .stats {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-    .card {
-      flex: 1;
-      padding: 15px;
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      text-align: center;
-    }
-    .card h2 {
-      margin: 0;
-      font-size: 16px;
-      color: #666;
-    }
-    .card p {
-      font-size: 22px;
-      font-weight: bold;
-      margin: 5px 0 0;
-    }
-    .filter {
-      padding: 15px;
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    .filter h3 {
-      margin-top: 0;
-      color: #333;
-    }
-    .filter button {
-      margin: 5px;
-      padding: 8px 15px;
-      border: none;
-      border-radius: 20px;
-      background-color: #d0f0d0;
-      color: #333;
-      cursor: pointer;
-    }
-    .filter button:hover {
-      background-color: #b0e0b0;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
+    body { background: #f4f4f4; }
+    .login-container, .dashboard { display: none; padding: 20px; }
+    .login-container.active, .dashboard.active { display: block; }.login-box { max-width: 400px; margin: 50px auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+.login-box h2 { margin-bottom: 15px; }
+.login-box input { width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 5px; }
+.login-box button { width: 100%; padding: 10px; background: #007bff; color: #fff; border: none; border-radius: 5px; cursor: pointer; }
+
+.topbar { background: #007bff; color: #fff; padding: 15px; display: flex; justify-content: space-between; align-items: center; }
+.menu-btn { font-size: 24px; cursor: pointer; }
+
+.sidebar { position: fixed; top: 0; left: -250px; width: 250px; height: 100%; background: #222; color: #fff; padding-top: 60px; transition: 0.3s ease; }
+.sidebar.active { left: 0; }
+.sidebar a { display: block; padding: 15px 20px; color: #fff; text-decoration: none; border-bottom: 1px solid #333; }
+.sidebar a:hover { background: #333; }
+
+.main-content { margin-top: 20px; }
+.card { background: #fff; padding: 20px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 0 5px rgba(0,0,0,0.1); }
+
   </style>
 </head>
-<body>
-  <header>
-    <div class="title">MozVendas</div>
-  </header>  <div class="container">
-    <div class="stats">
-      <div class="card">
-        <h2>Vendas do dia</h2>
-        <p style="color: green;">MZN 0</p>
-      </div>
-      <div class="card">
-        <h2>Total de vendas</h2>
-        <p>0</p>
-      </div>
-    </div><div class="filter">
-  <h3>Filtrar por período:</h3>
-  <button onclick="filtrar('hoje')">Hoje</button>
-  <button onclick="filtrar('ontem')">Ontem</button>
-  <button onclick="filtrar('7')">Últimos 7 dias</button>
-  <button onclick="filtrar('30')">Últimos 30 dias</button>
-  <button onclick="filtrar('sempre')">Sempre</button>
+<body>  <!-- Login -->  <div class="login-container active" id="loginContainer">
+    <div class="login-box">
+      <h2>Login MozVendas</h2>
+      <input type="email" id="email" placeholder="Email">
+      <input type="password" id="password" placeholder="Senha">
+      <button onclick="login()">Entrar</button>
+    </div>
+  </div>  <!-- Dashboard -->  <div class="dashboard" id="dashboard">
+    <div class="topbar">
+      <span class="menu-btn" onclick="toggleMenu()">☰</span>
+      <span>MozVendas</span>
+    </div><div class="sidebar" id="sidebar">
+  <a href="#">📦 Meus Produtos</a>
+  <a href="#">💰 Minhas Vendas</a>
+  <a href="#">💳 Checkout</a>
+  <a href="#">🗃️ Relatórios</a>
+</div>
+
+<div class="main-content">
+  <div class="card">
+    <h3>Total de Vendas</h3>
+    <p>0 MZN</p>
+  </div>
+  <div class="card">
+    <h3>Produtos em Destaque</h3>
+    <p>Nenhum ainda</p>
+  </div>
+  <div class="card">
+    <h3>Métodos de Pagamento</h3>
+    <ul>
+      <li>M-Pesa</li>
+      <li>E-Mola</li>
+      <li>Banco</li>
+    </ul>
+  </div>
 </div>
 
   </div>  <script>
-    function filtrar(periodo) {
-      alert("Filtrando por: " + periodo);
-      // Aqui você pode integrar com Firebase para buscar os dados reais com base no período
+    function toggleMenu() {
+      document.getElementById("sidebar").classList.toggle("active");
+    }
+
+    function login() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      // Simulação de login (sem Firebase por enquanto)
+      if (email === "teste@moz.com" && password === "123456") {
+        document.getElementById("loginContainer").classList.remove("active");
+        document.getElementById("dashboard").classList.add("active");
+      } else {
+        alert("Credenciais inválidas. Use: teste@moz.com / 123456");
+      }
     }
   </script></body>
 </html>
