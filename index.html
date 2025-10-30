@@ -28,15 +28,17 @@ body {
   --card-bg: #F8FAFC;
   --shadow-color: rgba(0,0,0,0.08);
 }
-.dark-mode {  
-  --bg-color: #121212;  
-  --text-color: #f1f1f1;  
-  --card-bg: #181818;  
+.dark-mode {
+  --bg-color: #121212;
+  --text-color: #f1f1f1;
+  --card-bg: #181818;
   --shadow-color: rgba(0,0,0,0.5);
 }
 body, footer, .logo-square, .logo-text, .card-valor, .card-valor1, .card-resumo {
   transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
 }
+
+/* Rodapé */
 footer {
   position: fixed;
   bottom: 0;
@@ -47,7 +49,6 @@ footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
   padding: 10px 16px;
   font-size: 14px;
   box-shadow: 0 -2px 10px var(--shadow-color);
@@ -57,22 +58,53 @@ footer {
 .logo-square { width: 28px; height: 28px; background: var(--bg-color); border: 2px solid var(--text-color); display:flex; justify-content:center; align-items:center; border-radius:5px; font-size:16px; font-weight:700; color: var(--text-color); box-shadow:1px 1px 3px rgba(0,0,0,0.2); transition: transform 0.2s ease; }
 .logo-square:hover { transform: scale(1.06); }
 .logo-text { font-size:16px; font-weight:700; letter-spacing:0.5px; color: var(--text-color); }
-.footer-right { display: flex; align-items: center; gap: 12px; }
-#toggle-theme { padding:6px; font-size:20px; background:none; border:none; cursor:pointer; color: var(--text-color); }
+
+.footer-right {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* espaçamento maior entre os botões */
+}
+
+/* Botões dentro do rodapé */
+#toggle-theme, #menu-btn {
+  background:none;
+  border:none;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-weight:600;
+  color: var(--text-color);
+}
+#toggle-theme { font-size:23px; }
+#menu-btn { font-size:18px; }
+#toggle-theme:hover, #menu-btn:hover { transform: scale(1.05); }
 
 /* CARDS */
 .card-valor, .card-valor1 {
+  position: relative;
   display:flex; align-items:center; max-width:600px; width:100%; padding:20px 16px; border-radius:10px; gap:10px;
   background:var(--card-bg); border:1px solid rgba(0,0,0,0.08); box-shadow:0 2px 6px var(--shadow-color);
 }
 .icon-box, .icon-box1 { font-size:25px; color:#6c757d; }
 .info-box, .info-box1 { display:flex; flex-direction: column; }
-.titulo, .titulo1 { font-size:15px; color:#6c757d; font-weight:800; }
-.valor { font-size:18px; font-weight:bold; color: green; }
-.valor1 { font-size:18px; font-weight:bold; color:#00aaff; }
-.toggle-valor, .toggle-valor1 { cursor:pointer; font-size:20px; color:#6c757d; margin-left:auto; }
+.titulo, .titulo1 { font-size:15px; font-weight:550; color:#6c757d; }
+.valor { font-size:17px; font-weight:bold; color: green; margin-top: 3px;}
+.valor1 { font-size:17px; font-weight:bold; color:#00aaff; margin-top: 3px; }
 
-/* Card Resumo - Atualizar Dados */
+/* Ícone de informação no canto direito */
+.info-icon {
+  position: absolute;
+  top: 15px;
+  right: 12px;
+  font-size: 18px;
+  color: #6c757d;
+  cursor: pointer;
+}
+.info-icon:hover {
+  color: #007bff;
+}
+
 .card-resumo {
   display:flex; align-items:center; justify-content:space-between;
   max-width:600px; width:100%; padding:12px 16px; border-radius:10px; gap:10px;
@@ -86,12 +118,51 @@ footer {
 }
 .card-resumo button:hover { transform: scale(1.05); }
 
-  .moeda {
-  font-size: 12px; /* menor que o valor principal */
-  font-weight: normal;
-  margin-left: 1px; /* espaçamento pequeno opcional */
+/* MENU LATERAL */
+#side-menu {
+  position: fixed;
+  top:0;
+  right:-50%; /* começa escondido ocupando metade da tela */
+  width:50%;
+  height:100%;
+  background-color: var(--card-bg);
+  box-shadow: -2px 0 10px var(--shadow-color);
+  transition: right 0.3s ease;
+  z-index:1002;
+  padding-top:60px;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
 }
+#side-menu.active { right:0; }
+
+#close-menu {
+  position: absolute;
+  top: 10px;
+  left: 15px; /* X agora no lado esquerdo */
+  font-size: 22px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-color);
 }
+#close-menu:hover { color: #007bff; }
+
+.side-menu-item {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:12px 20px;
+  font-size:16px;
+  font-weight:500;
+  color: var(--text-color);
+  cursor:pointer;
+  border-radius:8px;
+  transition: background 0.2s;
+}
+.side-menu-item:hover { background-color: rgba(0,0,0,0.05); }
+.side-menu-item i { font-size:18px; }
+
 </style>
 </head>
 <body>
@@ -108,13 +179,14 @@ footer {
   <button id="btn-atualizar">Atualizar</button>
 </div>
 
+<!-- Card Faturamento -->
 <div class="card-valor">
   <div class="icon-box"><i class="bi bi-currency-dollar"></i></div>
   <div class="info-box">
     <span class="titulo">Faturamento Líquido</span>
-    <span class="valor" id="valor">100,00<span class="moeda">Mt</span></span>
+    <span class="valor" id="valor">100.00MZN$</span>
   </div>
-  <div class="toggle-valor" onclick="toggleValor()"><i id="icone" class="bi bi-eye"></i></div>
+  <i class="bi bi-info-circle info-icon"></i>
 </div>
 
 <!-- Card Vendas -->
@@ -124,7 +196,15 @@ footer {
     <span class="titulo1">Vendas Realizadas</span>
     <span class="valor1" id="valor1">3</span>
   </div>
-  <div class="toggle-valor1" onclick="toggleValor1()"><i id="icone1" class="bi bi-eye"></i></div>
+  <i class="bi bi-info-circle info-icon"></i>
+</div>
+
+<!-- MENU LATERAL -->
+<div id="side-menu">
+  <button id="close-menu" aria-label="Fechar menu"><i class="bi bi-chevron-left"></i></button>
+  <div class="side-menu-item"><i class="bi bi-box-seam"></i> Produtos</div>
+  <div class="side-menu-item"><i class="bi bi-currency-dollar"></i> Financeiro</div>
+  <div class="side-menu-item"><i class="bi bi-bar-chart-line"></i> Relatórios</div>
 </div>
 
 <!-- Rodapé -->
@@ -136,6 +216,9 @@ footer {
   <div class="footer-right">
     <button id="toggle-theme" aria-label="Alternar tema">
       <i id="theme-icon" class="bi bi-sun"></i>
+    </button>
+    <button id="menu-btn" aria-label="Abrir menu">
+      Menu <i class="bi bi-chevron-right"></i>
     </button>
   </div>
 </footer>
@@ -154,26 +237,19 @@ if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matche
   document.getElementById('theme-icon').classList.replace('bi-sun','bi-moon');
 }
 
-// Mostrar/ocultar valores
-const originalValor = document.getElementById("valor").textContent;
-function toggleValor() {
-  const valor = document.getElementById("valor");
-  const icone = document.getElementById("icone");
-  if(valor.textContent==="***"){ valor.textContent=originalValor; icone.classList.replace("bi-eye-slash","bi-eye"); }
-  else{ valor.textContent="***"; icone.classList.replace("bi-eye","bi-eye-slash"); }
-}
-const originalValor1 = document.getElementById("valor1").textContent;
-function toggleValor1() {
-  const valor = document.getElementById("valor1");
-  const icone = document.getElementById("icone1");
-  if(valor.textContent==="***"){ valor.textContent=originalValor1; icone.classList.replace("bi-eye-slash","bi-eye"); }
-  else{ valor.textContent="***"; icone.classList.replace("bi-eye","bi-eye-slash"); }
-}
-
-// Botão Atualizar (você pode colocar sua função real aqui)
+// Botão Atualizar (placeholder)
 document.getElementById("btn-atualizar").addEventListener("click", () => {
-  alert("Atualização do dashboard executada!");
+  alert("Dados do Dashboard atualizados!");
 });
+
+// Botão Menu
+const menuBtn = document.getElementById('menu-btn');
+const sideMenu = document.getElementById('side-menu');
+const closeMenu = document.getElementById('close-menu');
+
+menuBtn.addEventListener('click', () => sideMenu.classList.add('active'));
+closeMenu.addEventListener('click', () => sideMenu.classList.remove('active'));
 </script>
+
 </body>
 </html>
