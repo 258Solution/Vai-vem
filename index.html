@@ -152,16 +152,17 @@ input, textarea {
     <label>Nome do cliente</label>
     <input type="text" id="nomeCliente" placeholder="Ex: João Manuel">
 
-    <label>Número / Email para ativação</label>
+    <label>Coloque aqui o Número para receber os megas </label>
     <input type="text" id="numeroCliente" placeholder="Ex: 84xxxxxxx ou email@dominio.com">
 
-    <label>Mensagem de confirmação de pagamento</label>
+    <label>Cole aqui a Mensagem de confirmação de pagamento</label>
     <textarea id="confirmacao" rows="3" placeholder="Pagamento feito via M-Pesa / E-mola"></textarea>
 
     <button class="btn-pedido" onclick="enviarWhatsApp()">Fazer Pedido</button>
 </div>
 
 </div>
+
 <script>
 let tipoSelecionado = "";
 let ofertaSelecionada = "";
@@ -172,7 +173,6 @@ function abrirPedido(tipo, oferta){
     document.getElementById("tipoPacote").innerText = tipo;
     document.getElementById("ofertaPacote").innerText = oferta;
     document.getElementById("pedido").style.display = "block";
-    // rola a página até o formulário
     document.getElementById("pedido").scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
@@ -186,7 +186,13 @@ function enviarWhatsApp(){
         return;
     }
 
-    const mensagem = `*📦 NOVO PEDIDO* 👤 Cliente: ${nome} 📌 Pacote: ${tipoSelecionado} 🎁 Oferta: ${ofertaSelecionada} 📲 Contacto / Email: ${numero} 🧾 Confirmação: ${confirmacao}`;
+    // Mensagem formatada com quebras de linha
+    const mensagem = `*📦 NOVO PEDIDO*\n` +
+                     `👤 Cliente: ${nome}\n` +
+                     `📌 Pacote: ${tipoSelecionado}\n` +
+                     `🎁 Oferta: ${ofertaSelecionada}\n` +
+                     `📲 Contacto / Email: ${numero}\n` +
+                     `🧾 Confirmação: ${confirmacao}`;
 
     const whatsapp = "258870419940";
     const url = `https://wa.me/${whatsapp}?text=${encodeURIComponent(mensagem)}`;
@@ -199,7 +205,6 @@ function enviarWhatsApp(){
     document.getElementById("pedido").style.display = "none";
 }
 </script>
-
 
 
 </body>
