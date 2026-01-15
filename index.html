@@ -1,7 +1,8 @@
-<!DOCTYPE html>
+        <!DOCTYPE html>
 <html lang="pt">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pacotes de Internet</title>
 
 <style>
@@ -11,68 +12,8 @@ body{
     padding:20px;
 }
 
-h2{ margin-top:30px; }
-
-.pacotes{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-    gap:15px;
-    margin-top:15px;
-}
-
-.btn-pacote{
-    background:#0d6efd;
-    color:#fff;
-    border:none;
-    border-radius:10px;
-    padding:15px;
-    cursor:pointer;
-    text-align:center;
-}
-
-.pedido{
-    display:none;
-    background:#fff;
-    padding:20px;
-    margin-top:25px;
-    border-radius:10px;
-    box-shadow:0 4px 8px rgba(0,0,0,0.1);
-}
-
-.box-pagamento{
-    background:#f1f5f9;
-    padding:12px;
-    border-radius:8px;
-    margin:15px 0;
-    font-size:15px;
-}
-
-.box-pagamento strong{
-    display:block;
-    margin-bottom:6px;
-}
-
-input, textarea{
-    width:90%;
-    padding:10px;
-    margin-top:8px;
-    border-radius:6px;
-    border:1px solid #ccc;
-}
-
-.btn-pedido{
-    margin-top:15px;
-    width:100%;
-    background:green;
-    color:white;
-    border:none;
-    padding:12px;
-    border-radius:8px;
-    font-size:16px;
-    cursor:pointer;
-}
-    
-    .topo-promo{
+/* TOPO PROMO */
+.topo-promo{
     text-align:left;
     margin-bottom:25px;
 }
@@ -95,11 +36,92 @@ input, textarea{
     font-size:22px;
     font-weight:700;
 }
+
+h2{
+    margin-top:30px;
+}
+
+/* PACOTES */
+.pacotes{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+    gap:15px;
+    margin-top:15px;
+}
+
+.btn-pacote{
+    background:#0d6efd;
+    color:#fff;
+    border:none;
+    border-radius:12px;
+    padding:18px;
+    cursor:pointer;
+    text-align:center;
+    font-size:15px;
+}
+
+/* FORMULÁRIO */
+.pedido{
+    display:none;
+    background:#fff;
+    padding:20px;
+    margin-top:25px;
+    border-radius:12px;
+    box-shadow:0 4px 8px rgba(0,0,0,0.1);
+}
+
+.box-pagamento{
+    background:#f1f5f9;
+    padding:12px;
+    border-radius:8px;
+    margin:15px 0;
+    font-size:15px;
+}
+
+.box-pagamento strong{
+    display:block;
+    margin-bottom:6px;
+}
+
+input, textarea{
+    width:100%;
+    padding:10px;
+    margin-top:8px;
+    border-radius:6px;
+    border:1px solid #ccc;
+}
+
+.btn-pedido{
+    margin-top:15px;
+    width:100%;
+    background:green;
+    color:white;
+    border:none;
+    padding:14px;
+    border-radius:10px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+/* MOBILE – 1 botão por linha */
+@media (max-width: 768px){
+    .pacotes{
+        grid-template-columns:1fr;
+    }
+
+    .btn-pacote{
+        font-size:16px;
+        padding:20px;
+        border-radius:16px;
+    }
+}
 </style>
 </head>
 
 <body>
-    <div class="topo-promo">
+
+<!-- TOPO -->
+<div class="topo-promo">
     <div class="brow">BROOW</div>
     <div class="meio">TXECA LA ESSA</div>
     <div class="promo">PROMO!</div>
@@ -136,15 +158,14 @@ input, textarea{
         📲 <b>M-Pesa:</b> 849029376
     </div>
 
-    <!-- NOVO INPUT -->
     <label>Nome do cliente</label>
     <input type="text" id="nomeCliente" placeholder="Ex: João Manuel">
 
-    <label>Número para receber os megas</label>
-    <input type="tel" id="numeroCliente" placeholder="Ex: 84xxxxxxx">
+    <label>Número / Email para ativação</label>
+    <input type="text" id="numeroCliente" placeholder="Ex: 84xxxxxxx ou email@dominio.com">
 
     <label>Mensagem de confirmação de pagamento</label>
-    <textarea id="confirmacao" rows="3" placeholder="Ex: Pagamento feito via M-Pesa / E-mola"></textarea>
+    <textarea id="confirmacao" rows="3" placeholder="Pagamento feito via M-Pesa / E-mola"></textarea>
 
     <button class="btn-pedido" onclick="enviarWhatsApp()">Fazer Pedido</button>
 </div>
@@ -175,22 +196,18 @@ function enviarWhatsApp(){
     }
 
     const mensagem =
-`📦 *NOVO PEDIDO*
+`📦 NOVO PEDIDO
 👤 Cliente: ${nome}
 📌 Pacote: ${tipoSelecionado}
 🎁 Oferta: ${ofertaSelecionada}
-📲 Número/Email: ${numero}
-🧾 Confirmação: ${confirmacao}
+📲 Contacto / Email: ${numero}
+🧾 Confirmação: ${confirmacao}`;
 
-💰 Pagamento:
-E-mola: 870419940
-M-Pesa: 849029376`;
-
-    const numeroWhatsApp = "258870419940";
-    const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}`;
-
+    const whatsapp = "258870419940";
+    const url = `https://wa.me/${whatsapp}?text=${encodeURIComponent(mensagem)}`;
     window.open(url, "_blank");
 }
 </script>
+
 </body>
 </html>
