@@ -126,7 +126,7 @@ input, textarea {
     <button class="btn-pacote diario" onclick="abrirPedido('Diário','200 MT – 11.000 MB')">200 MT<span>11.000 MB</span></button>
 </div>
 
-<!-- PACOTES MENSAL -->
+<!-- PACOTES MENSAL (visíveis, mas a pessoa rola para ver) -->
 <h2>📆 Pacote Mensal (30 dias)</h2>
 <div class="card">
     <button class="btn-pacote mensal" onclick="abrirPedido('Mensal','160 MT – 6.000 MB')">160 MT<span>6.000 MB</span></button>
@@ -136,7 +136,7 @@ input, textarea {
     <button class="btn-pacote mensal" onclick="abrirPedido('Mensal','2.000 MT – 105.000 MB')">2.000 MT<span>105.000 MB</span></button>
 </div>
 
-<!-- FORMULÁRIO -->
+<!-- FORMULÁRIO (aparece ao clicar no botão de pacote) -->
 <div class="pedido" id="pedido">
     <h3>📲 Fazer Pedido</h3>
 
@@ -173,7 +173,8 @@ function abrirPedido(tipo, oferta){
     document.getElementById("tipoPacote").innerText = tipo;
     document.getElementById("ofertaPacote").innerText = oferta;
     document.getElementById("pedido").style.display = "block";
-    window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+    // rola a página até o formulário
+    document.getElementById("pedido").scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 function enviarWhatsApp(){
