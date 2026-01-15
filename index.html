@@ -1,64 +1,196 @@
-<!DOCTYPE html><html lang="pt">
+<!DOCTYPE html>
+<html lang="pt">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portfólio | Mopmh</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
-    body { background: #0f172a; color: #e5e7eb; line-height: 1.6; }
-    header { background: #020617; padding: 40px 20px; text-align: center; }
-    header h1 { font-size: 2rem; color: #38bdf8; text-align: center; }@media (max-width: 600px) { header h1 { font-size: 1.6rem; } } header p { margin-top: 5px; color: #cbd5f5; } nav { margin-top: 20px; } nav a { color: #e5e7eb; margin: 0 10px; text-decoration: none; font-weight: bold; } nav a:hover { color: #38bdf8; } section { padding: 60px 20px; max-width: 1000px; margin: auto; } h2 { color: #38bdf8; margin-bottom: 20px; } .sobre, .contato { background: #020617; border-radius: 12px; padding: 30px; } .skills, .projetos { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; } .card { background: #020617; padding: 16px; border-radius: 10px; box-shadow: 0 6px 14px rgba(0,0,0,.25); } .card h3 { color: #38bdf8; margin-bottom: 10px; } footer { text-align: center; padding: 20px; background: #020617; color: #94a3b8; } button { background: #38bdf8; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; } button:hover { background: #0ea5e9; } </style>
+<meta charset="UTF-8">
+<title>Pacotes de Internet</title>
 
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#f4f6f8;
+    padding:20px;
+}
+
+h2{ margin-top:30px; }
+
+.pacotes{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+    gap:15px;
+    margin-top:15px;
+}
+
+.btn-pacote{
+    background:#0d6efd;
+    color:#fff;
+    border:none;
+    border-radius:10px;
+    padding:15px;
+    cursor:pointer;
+    text-align:center;
+}
+
+.pedido{
+    display:none;
+    background:#fff;
+    padding:20px;
+    margin-top:25px;
+    border-radius:10px;
+    box-shadow:0 4px 8px rgba(0,0,0,0.1);
+}
+
+.box-pagamento{
+    background:#f1f5f9;
+    padding:12px;
+    border-radius:8px;
+    margin:15px 0;
+    font-size:15px;
+}
+
+.box-pagamento strong{
+    display:block;
+    margin-bottom:6px;
+}
+
+input, textarea{
+    width:90%;
+    padding:10px;
+    margin-top:8px;
+    border-radius:6px;
+    border:1px solid #ccc;
+}
+
+.btn-pedido{
+    margin-top:15px;
+    width:100%;
+    background:green;
+    color:white;
+    border:none;
+    padding:12px;
+    border-radius:8px;
+    font-size:16px;
+    cursor:pointer;
+}
+    
+    .topo-promo{
+    text-align:left;
+    margin-bottom:25px;
+}
+
+.topo-promo .brow{
+    color:red;
+    font-size:28px;
+    font-weight:800;
+    letter-spacing:2px;
+}
+
+.topo-promo .meio{
+    color:#000;
+    font-size:18px;
+    margin:6px 0;
+}
+
+.topo-promo .promo{
+    color:#000;
+    font-size:22px;
+    font-weight:700;
+}
+</style>
 </head>
-<body><header>
-  <h1>Elves Francisco Mutombene</h1>
-  <p>Empreendedor | Criador Digital | Desenvolvedor Iniciante</p>
-  <nav>
-    <a href="#sobre">Sobre</a>
-    <a href="#skills">Habilidades</a>
-    <a href="#projetos">Projetos</a>
-    <a href="#contato">Contato</a>
-  </nav>
-</header><section id="sobre">
-  <div class="sobre">
-    <h2>Sobre mim</h2>
-    <p>
-      Sou um profissional com experiência prática em <strong>eletricidade</strong> e <strong>carpintaria</strong>. Trabalho com foco em soluções seguras, funcionais e bem acabadas, buscando sempre qualidade, responsabilidade e satisfação do cliente.
-    </p>
-  </div>
-</section><section id="skills">
-  <h2>Habilidades</h2>
-  <div class="skills">
-    <div class="card"><h3>Eletricidade</h3><p>Instalações elétricas, manutenção, reparos e segurança.</p></div>
-    <div class="card"><h3>Carpintaria</h3><p>Móveis, portas, ajustes, montagem e reparações em madeira.</p></div>
-    <div class="card"><h3>Trabalho Profissional</h3><p>Pontualidade, organização e atenção aos detalhes.</p></div>
-    <div class="card"><h3>Atendimento ao Cliente</h3><p>Comunicação clara e compromisso com o cliente.</p></div>
-  </div>
-</section><section id="projetos">
-  <h2>Projetos</h2>
-  <div class="projetos">
-    <div class="card">
-      <h3>Portfólio Pessoal</h3>
-      <p>Website pessoal feito em HTML, CSS e JS.</p>
+
+<body>
+    <div class="topo-promo">
+    <div class="brow">BROOW</div>
+    <div class="meio">TXECA LA ESSA</div>
+    <div class="promo">PROMO!</div>
+</div>
+
+<h2>📅 Pacote Diário (24hrs)</h2>
+<div class="pacotes">
+    <button class="btn-pacote" onclick="abrirPedido('Diário','20 MT – 1.100 MB')">20 MT<br>1.100 MB</button>
+    <button class="btn-pacote" onclick="abrirPedido('Diário','40 MT – 2.200 MB')">40 MT<br>2.200 MB</button>
+    <button class="btn-pacote" onclick="abrirPedido('Diário','60 MT – 3.300 MB')">60 MT<br>3.300 MB</button>
+    <button class="btn-pacote" onclick="abrirPedido('Diário','100 MT – 5.500 MB')">100 MT<br>5.500 MB</button>
+    <button class="btn-pacote" onclick="abrirPedido('Diário','200 MT – 11.000 MB')">200 MT<br>11.000 MB</button>
+</div>
+
+<h2>📆 Pacote Mensal (30 dias)</h2>
+<div class="pacotes">
+    <button class="btn-pacote" onclick="abrirPedido('Mensal','160 MT – 6.000 MB')">160 MT<br>6.000 MB</button>
+    <button class="btn-pacote" onclick="abrirPedido('Mensal','300 MT – 13.000 MB')">300 MT<br>13.000 MB</button>
+    <button class="btn-pacote" onclick="abrirPedido('Mensal','500 MT – 23.000 MB')">500 MT<br>23.000 MB</button>
+    <button class="btn-pacote" onclick="abrirPedido('Mensal','1.100 MT – 54.000 MB')">1.100 MT<br>54.000 MB</button>
+    <button class="btn-pacote" onclick="abrirPedido('Mensal','2.000 MT – 105.000 MB')">2.000 MT<br>105.000 MB</button>
+</div>
+
+<!-- FORMULÁRIO -->
+<div class="pedido" id="pedido">
+    <h3>📲 Fazer Pedido</h3>
+
+    <p><strong>Pacote selecionado:</strong><br><span id="tipoPacote"></span></p>
+    <p><strong>Oferta:</strong><br><span id="ofertaPacote"></span></p>
+
+    <div class="box-pagamento">
+        <strong>💰 Pagamento</strong>
+        📲 <b>E-mola:</b> 870419940<br>
+        📲 <b>M-Pesa:</b> 849029376
     </div>
-    <div class="card">
-      <h3>Página de Serviços</h3>
-      <p>Página profissional para prestação de serviços.</p>
-    </div>
-    <div class="card">
-      <h3>Infoproduto</h3>
-      <p>Criação e divulgação de produto digital.</p>
-    </div>
-  </div>
-</section><section id="contato">
-  <div class="contato">
-    <h2>Contato</h2>
-    <p>Email: <strong>seuemail@email.com</strong></p>
-    <p>WhatsApp: <strong>+258 870419940</strong></p>
-    <br />
-    <button onclick="alert('Obrigado pelo contato!')">Fale comigo</button>
-  </div>
-</section><footer>
-  <p>© 2025 Elves Francisco Mutombene — Todos os direitos reservados</p>
-</footer></body>
+
+    <!-- NOVO INPUT -->
+    <label>Nome do cliente</label>
+    <input type="text" id="nomeCliente" placeholder="Ex: João Manuel">
+
+    <label>Número para receber os megas</label>
+    <input type="tel" id="numeroCliente" placeholder="Ex: 84xxxxxxx">
+
+    <label>Mensagem de confirmação de pagamento</label>
+    <textarea id="confirmacao" rows="3" placeholder="Ex: Pagamento feito via M-Pesa / E-mola"></textarea>
+
+    <button class="btn-pedido" onclick="enviarWhatsApp()">Fazer Pedido</button>
+</div>
+
+<script>
+let tipoSelecionado = "";
+let ofertaSelecionada = "";
+
+function abrirPedido(tipo, oferta){
+    tipoSelecionado = tipo;
+    ofertaSelecionada = oferta;
+
+    document.getElementById("tipoPacote").innerText = tipo;
+    document.getElementById("ofertaPacote").innerText = oferta;
+    document.getElementById("pedido").style.display = "block";
+
+    window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+}
+
+function enviarWhatsApp(){
+    const nome = document.getElementById("nomeCliente").value;
+    const numero = document.getElementById("numeroCliente").value;
+    const confirmacao = document.getElementById("confirmacao").value;
+
+    if(nome === "" || numero === "" || confirmacao === ""){
+        alert("Preencha todos os campos!");
+        return;
+    }
+
+    const mensagem =
+`📦 *NOVO PEDIDO*
+👤 Cliente: ${nome}
+📌 Pacote: ${tipoSelecionado}
+🎁 Oferta: ${ofertaSelecionada}
+📲 Número/Email: ${numero}
+🧾 Confirmação: ${confirmacao}
+
+💰 Pagamento:
+E-mola: 870419940
+M-Pesa: 849029376`;
+
+    const numeroWhatsApp = "258870419940";
+    const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}`;
+
+    window.open(url, "_blank");
+}
+</script>
+</body>
 </html>
