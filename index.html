@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+   <!DOCTYPE html>
 <html lang="pt">
 <head>
 <meta charset="UTF-8">
@@ -6,84 +6,66 @@
 <title>Pacotes de Internet</title>
 
 <style>
-/* RESET BÁSICO */
-body{
+body {
     font-family: Arial, sans-serif;
     margin:0;
     padding:0;
     background:#f4f6f8;
 }
 
-/* CONTAINER MOBILE */
-.mobile-container{
+.container {
     max-width:420px;
     margin:0 auto;
     padding:16px;
-    background:#f4f6f8;
 }
 
 /* TOPO PROMO */
-.topo-promo{
+.topo-promo {
     text-align:left;
     margin-bottom:20px;
 }
+.topo-promo .brow { color:red; font-size:28px; font-weight:800; letter-spacing:1px; }
+.topo-promo .meio { color:#000; font-size:18px; margin:4px 0; }
+.topo-promo .promo { color:#000; font-size:22px; font-weight:700; }
 
-.topo-promo .brow{
-    color:red;
-    font-size:28px;
-    font-weight:800;
-    letter-spacing:2px;
-}
-
-.topo-promo .meio{
-    color:#000;
-    font-size:18px;
-    margin:6px 0;
-}
-
-.topo-promo .promo{
-    color:#000;
-    font-size:22px;
-    font-weight:700;
-}
-
-/* TITULOS PACOTES */
-h2{
-    margin-top:20px;
-    font-size:20px;
-}
+/* TÍTULOS PACOTES */
+h2 { font-size:20px; margin-top:16px; }
 
 /* PACOTES */
-.pacotes{
-    display:grid;
-    grid-template-columns:1fr;
+.pacotes {
+    display:flex;
+    flex-direction:column;
     gap:12px;
-    margin-top:15px;
+    margin-top:12px;
 }
 
-.btn-pacote{
+.btn-pacote {
     background:#0d6efd;
     color:#fff;
     border:none;
-    border-radius:16px;
-    padding:22px;
-    cursor:pointer;
-    text-align:left;
+    border-radius:12px;
+    padding:18px;
     font-size:17px;
     line-height:1.4;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    cursor:pointer;
 }
 
 /* FORMULÁRIO */
-.pedido{
+.pedido {
     display:none;
     background:#fff;
     padding:20px;
-    margin-top:25px;
+    margin-top:20px;
     border-radius:12px;
     box-shadow:0 4px 8px rgba(0,0,0,0.1);
 }
 
-.box-pagamento{
+.box-pagamento {
     background:#f1f5f9;
     padding:12px;
     border-radius:8px;
@@ -91,12 +73,9 @@ h2{
     font-size:15px;
 }
 
-.box-pagamento strong{
-    display:block;
-    margin-bottom:6px;
-}
+.box-pagamento strong { display:block; margin-bottom:6px; }
 
-input, textarea{
+input, textarea {
     width:100%;
     padding:12px;
     margin-top:8px;
@@ -105,7 +84,7 @@ input, textarea{
     font-size:16px;
 }
 
-.btn-pedido{
+.btn-pedido {
     margin-top:15px;
     width:100%;
     background:green;
@@ -116,19 +95,11 @@ input, textarea{
     font-size:16px;
     cursor:pointer;
 }
-
-/* RESPONSIVO PC (mantém mobile-first) */
-@media (min-width: 769px){
-    .mobile-container{
-        max-width:420px;
-    }
-}
 </style>
 </head>
 
 <body>
-
-<div class="mobile-container">
+<div class="container">
 
 <!-- TOPO PROMO -->
 <div class="topo-promo">
@@ -183,7 +154,7 @@ input, textarea{
     <button class="btn-pedido" onclick="enviarWhatsApp()">Fazer Pedido</button>
 </div>
 
-</div> <!-- fim container -->
+</div> <!-- container -->
 
 <script>
 let tipoSelecionado = "";
@@ -225,4 +196,4 @@ function enviarWhatsApp(){
 </script>
 
 </body>
-</html>
+</html> 
