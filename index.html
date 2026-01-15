@@ -3,30 +3,42 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pacotes de Internet - Estilo App</title>
+<title>Pacotes de Internet - App Mobile</title>
 <style>
 * { box-sizing:border-box; margin:0; padding:0; }
+
 body {
     font-family: Arial, sans-serif;
     background:#f4f6f8;
-    display:flex;
-    justify-content:center;
     padding:16px 0;
 }
+
+/* CONTAINER */
 .container {
     width:100%;
-    max-width:480px;
-    padding:0 16px;
+    padding:0 12px;
 }
+
 /* TOPO PROMO */
-.topo-promo { text-align:left; margin-bottom:20px; }
+.topo-promo {
+    text-align:left;
+    margin-bottom:20px;
+}
 .topo-promo .brow { color:red; font-size:28px; font-weight:800; }
 .topo-promo .meio { color:#000; font-size:18px; margin:4px 0; font-weight:600; }
 .topo-promo .promo { color:#000; font-size:22px; font-weight:700; }
+
 /* TÍTULOS */
 h2 { font-size:20px; margin:16px 0 12px 0; }
+
 /* CARD PACOTES */
-.card { background:#fff; border-radius:16px; padding:16px; margin-bottom:20px; }
+.card {
+    background:#fff;
+    border-radius:16px;
+    padding:16px;
+    margin-bottom:20px;
+}
+
 /* BOTÕES PACOTE */
 .btn-pacote {
     display:block;
@@ -42,11 +54,13 @@ h2 { font-size:20px; margin:16px 0 12px 0; }
     cursor:pointer;
     transition: transform 0.1s ease;
 }
-.btn-pacote span { display:block; font-size:16px; margin-top:4px; }
-/* Cores por tipo */
-.diario { background:#0d6efd; }  /* Azul Diário */
-.mensal { background:#ff9f1c; }  /* Laranja Mensal */
+.btn-pacote span { display:block; font-size:16px; margin-top:4px; font-weight:500; }
 .btn-pacote:active { transform: scale(0.97); }
+
+/* CORES POR TIPO */
+.diario { background:#0d6efd; }   /* Azul Diário */
+.mensal { background:#ff9f1c; }   /* Laranja Mensal */
+
 /* FORMULÁRIO */
 .pedido {
     display:none;
@@ -78,6 +92,7 @@ input, textarea {
     transition: transform 0.1s ease;
 }
 .btn-pedido:active { transform: scale(0.97); }
+
 /* PAGAMENTO */
 .box-pagamento {
     background:#f1f5f9;
@@ -87,9 +102,11 @@ input, textarea {
     font-size:15px;
 }
 .box-pagamento strong { display:block; margin-bottom:6px; }
+
 </style>
 </head>
 <body>
+
 <div class="container">
 
 <!-- TOPO PROMO -->
