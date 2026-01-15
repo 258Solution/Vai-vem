@@ -1,4 +1,4 @@
-        <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt">
 <head>
 <meta charset="UTF-8">
@@ -6,16 +6,26 @@
 <title>Pacotes de Internet</title>
 
 <style>
+/* RESET BÁSICO */
 body{
     font-family: Arial, sans-serif;
+    margin:0;
+    padding:0;
     background:#f4f6f8;
-    padding:20px;
+}
+
+/* CONTAINER MOBILE */
+.mobile-container{
+    max-width:420px;
+    margin:0 auto;
+    padding:16px;
+    background:#f4f6f8;
 }
 
 /* TOPO PROMO */
 .topo-promo{
     text-align:left;
-    margin-bottom:25px;
+    margin-bottom:20px;
 }
 
 .topo-promo .brow{
@@ -37,15 +47,17 @@ body{
     font-weight:700;
 }
 
+/* TITULOS PACOTES */
 h2{
-    margin-top:30px;
+    margin-top:20px;
+    font-size:20px;
 }
 
 /* PACOTES */
 .pacotes{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-    gap:15px;
+    grid-template-columns:1fr;
+    gap:12px;
     margin-top:15px;
 }
 
@@ -53,11 +65,12 @@ h2{
     background:#0d6efd;
     color:#fff;
     border:none;
-    border-radius:12px;
-    padding:18px;
+    border-radius:16px;
+    padding:22px;
     cursor:pointer;
-    text-align:center;
-    font-size:15px;
+    text-align:left;
+    font-size:17px;
+    line-height:1.4;
 }
 
 /* FORMULÁRIO */
@@ -85,10 +98,11 @@ h2{
 
 input, textarea{
     width:100%;
-    padding:10px;
+    padding:12px;
     margin-top:8px;
     border-radius:6px;
     border:1px solid #ccc;
+    font-size:16px;
 }
 
 .btn-pedido{
@@ -98,21 +112,15 @@ input, textarea{
     color:white;
     border:none;
     padding:14px;
-    border-radius:10px;
+    border-radius:12px;
     font-size:16px;
     cursor:pointer;
 }
 
-/* MOBILE – 1 botão por linha */
-@media (max-width: 768px){
-    .pacotes{
-        grid-template-columns:1fr;
-    }
-
-    .btn-pacote{
-        font-size:16px;
-        padding:20px;
-        border-radius:16px;
+/* RESPONSIVO PC (mantém mobile-first) */
+@media (min-width: 769px){
+    .mobile-container{
+        max-width:420px;
     }
 }
 </style>
@@ -120,13 +128,16 @@ input, textarea{
 
 <body>
 
-<!-- TOPO -->
+<div class="mobile-container">
+
+<!-- TOPO PROMO -->
 <div class="topo-promo">
     <div class="brow">BROOW</div>
     <div class="meio">TXECA LA ESSA</div>
     <div class="promo">PROMO!</div>
 </div>
 
+<!-- PACOTES DIÁRIO -->
 <h2>📅 Pacote Diário (24hrs)</h2>
 <div class="pacotes">
     <button class="btn-pacote" onclick="abrirPedido('Diário','20 MT – 1.100 MB')">20 MT<br>1.100 MB</button>
@@ -136,6 +147,7 @@ input, textarea{
     <button class="btn-pacote" onclick="abrirPedido('Diário','200 MT – 11.000 MB')">200 MT<br>11.000 MB</button>
 </div>
 
+<!-- PACOTES MENSAL -->
 <h2>📆 Pacote Mensal (30 dias)</h2>
 <div class="pacotes">
     <button class="btn-pacote" onclick="abrirPedido('Mensal','160 MT – 6.000 MB')">160 MT<br>6.000 MB</button>
@@ -152,6 +164,7 @@ input, textarea{
     <p><strong>Pacote selecionado:</strong><br><span id="tipoPacote"></span></p>
     <p><strong>Oferta:</strong><br><span id="ofertaPacote"></span></p>
 
+    <!-- PAGAMENTO SÓ NA PÁGINA -->
     <div class="box-pagamento">
         <strong>💰 Pagamento</strong>
         📲 <b>E-mola:</b> 870419940<br>
@@ -169,6 +182,8 @@ input, textarea{
 
     <button class="btn-pedido" onclick="enviarWhatsApp()">Fazer Pedido</button>
 </div>
+
+</div> <!-- fim container -->
 
 <script>
 let tipoSelecionado = "";
