@@ -162,7 +162,6 @@ input, textarea {
 </div>
 
 </div>
-
 <script>
 let tipoSelecionado = "";
 let ofertaSelecionada = "";
@@ -187,18 +186,21 @@ function enviarWhatsApp(){
         return;
     }
 
-    const mensagem = `*📦 NOVO PEDIDO*
-👤 Cliente: ${nome}
-📌 Pacote: ${tipoSelecionado}
-🎁 Oferta: ${ofertaSelecionada}
-📲 Contacto / Email: ${numero}
-🧾 Confirmação: ${confirmacao}`;
+    const mensagem = `*📦 NOVO PEDIDO* 👤 Cliente: ${nome} 📌 Pacote: ${tipoSelecionado} 🎁 Oferta: ${ofertaSelecionada} 📲 Contacto / Email: ${numero} 🧾 Confirmação: ${confirmacao}`;
 
     const whatsapp = "258870419940";
     const url = `https://wa.me/${whatsapp}?text=${encodeURIComponent(mensagem)}`;
     window.open(url, "_blank");
+
+    // LIMPAR FORMULÁRIO E OCULTAR
+    document.getElementById("nomeCliente").value = "";
+    document.getElementById("numeroCliente").value = "";
+    document.getElementById("confirmacao").value = "";
+    document.getElementById("pedido").style.display = "none";
 }
 </script>
+
+
 
 </body>
 </html>
