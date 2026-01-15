@@ -5,12 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pacotes de Internet - Estilo App</title>
 <style>
-/* RESET */
-* {
-    box-sizing: border-box;
-    margin:0;
-    padding:0;
-}
+* { box-sizing:border-box; margin:0; padding:0; }
 body {
     font-family: Arial, sans-serif;
     background:#f4f6f8;
@@ -18,91 +13,76 @@ body {
     justify-content:center;
     padding:16px 0;
 }
-/* CONTAINER MOBILE */
 .container {
-    max-width:420px;
     width:100%;
+    max-width:480px;
     padding:0 16px;
 }
 /* TOPO PROMO */
-.topo-promo {
-    margin-bottom:20px;
-}
-.topo-promo .brow { color:red; font-size:28px; font-weight:800; letter-spacing:1px; }
-.topo-promo .meio { color:#000; font-size:18px; margin:4px 0; }
+.topo-promo { text-align:left; margin-bottom:20px; }
+.topo-promo .brow { color:red; font-size:28px; font-weight:800; }
+.topo-promo .meio { color:#000; font-size:18px; margin:4px 0; font-weight:600; }
 .topo-promo .promo { color:#000; font-size:22px; font-weight:700; }
-/* TÍTULOS SEÇÃO */
+/* TÍTULOS */
 h2 { font-size:20px; margin:16px 0 12px 0; }
-/* CARD PACOTE */
-.card {
-    background:#fff;
-    border-radius:16px;
-    box-shadow:0 4px 10px rgba(0,0,0,0.1);
-    margin-bottom:16px;
-    padding:16px;
-}
+/* CARD PACOTES */
+.card { background:#fff; border-radius:16px; padding:16px; margin-bottom:20px; }
 /* BOTÕES PACOTE */
 .btn-pacote {
-    background:#0d6efd;
+    display:block;
+    width:100%;
+    padding:18px;
+    margin-bottom:12px;
+    font-size:18px;
+    font-weight:600;
+    text-align:center;
     color:#fff;
     border:none;
     border-radius:12px;
-    padding:18px;
-    font-size:18px;
-    font-weight:600;
-    width:100%;
-    text-align:center;
     cursor:pointer;
-    margin-bottom:12px;
     transition: transform 0.1s ease;
 }
-.btn-pacote span {
-    display:block;
-    font-size:16px;
-    margin-top:4px;
-}
-.btn-pacote:active {
-    transform: scale(0.97);
-}
+.btn-pacote span { display:block; font-size:16px; margin-top:4px; }
+/* Cores por tipo */
+.diario { background:#0d6efd; }  /* Azul Diário */
+.mensal { background:#ff9f1c; }  /* Laranja Mensal */
+.btn-pacote:active { transform: scale(0.97); }
 /* FORMULÁRIO */
 .pedido {
     display:none;
     background:#fff;
     padding:20px;
     border-radius:16px;
-    box-shadow:0 4px 10px rgba(0,0,0,0.1);
-    margin-top:16px;
+    margin-bottom:30px;
 }
 .pedido label { font-weight:600; margin-top:10px; display:block; }
 input, textarea {
     width:100%;
     padding:14px;
     margin-top:6px;
-    border-radius:10px;
+    border-radius:12px;
     border:1px solid #ccc;
     font-size:16px;
 }
 .btn-pedido {
-    margin-top:16px;
     width:100%;
     background:green;
-    color:white;
+    color:#fff;
     border:none;
     padding:16px;
     border-radius:16px;
     font-size:18px;
-    font-weight:600;
+    font-weight:700;
     cursor:pointer;
+    margin-top:16px;
     transition: transform 0.1s ease;
 }
-.btn-pedido:active {
-    transform: scale(0.97);
-}
+.btn-pedido:active { transform: scale(0.97); }
 /* PAGAMENTO */
 .box-pagamento {
     background:#f1f5f9;
     padding:14px;
-    border-radius:10px;
+    border-radius:12px;
     margin:16px 0;
     font-size:15px;
 }
@@ -122,21 +102,21 @@ input, textarea {
 <!-- PACOTES DIÁRIO -->
 <h2>📦 Pacote Diário (24hrs)</h2>
 <div class="card">
-    <button class="btn-pacote" onclick="abrirPedido('Diário','20 MT – 1.100 MB')">20 MT<span>1.100 MB</span></button>
-    <button class="btn-pacote" onclick="abrirPedido('Diário','40 MT – 2.200 MB')">40 MT<span>2.200 MB</span></button>
-    <button class="btn-pacote" onclick="abrirPedido('Diário','60 MT – 3.300 MB')">60 MT<span>3.300 MB</span></button>
-    <button class="btn-pacote" onclick="abrirPedido('Diário','100 MT – 5.500 MB')">100 MT<span>5.500 MB</span></button>
-    <button class="btn-pacote" onclick="abrirPedido('Diário','200 MT – 11.000 MB')">200 MT<span>11.000 MB</span></button>
+    <button class="btn-pacote diario" onclick="abrirPedido('Diário','20 MT – 1.100 MB')">20 MT<span>1.100 MB</span></button>
+    <button class="btn-pacote diario" onclick="abrirPedido('Diário','40 MT – 2.200 MB')">40 MT<span>2.200 MB</span></button>
+    <button class="btn-pacote diario" onclick="abrirPedido('Diário','60 MT – 3.300 MB')">60 MT<span>3.300 MB</span></button>
+    <button class="btn-pacote diario" onclick="abrirPedido('Diário','100 MT – 5.500 MB')">100 MT<span>5.500 MB</span></button>
+    <button class="btn-pacote diario" onclick="abrirPedido('Diário','200 MT – 11.000 MB')">200 MT<span>11.000 MB</span></button>
 </div>
 
 <!-- PACOTES MENSAL -->
 <h2>📆 Pacote Mensal (30 dias)</h2>
 <div class="card">
-    <button class="btn-pacote" onclick="abrirPedido('Mensal','160 MT – 6.000 MB')">160 MT<span>6.000 MB</span></button>
-    <button class="btn-pacote" onclick="abrirPedido('Mensal','300 MT – 13.000 MB')">300 MT<span>13.000 MB</span></button>
-    <button class="btn-pacote" onclick="abrirPedido('Mensal','500 MT – 23.000 MB')">500 MT<span>23.000 MB</span></button>
-    <button class="btn-pacote" onclick="abrirPedido('Mensal','1.100 MT – 54.000 MB')">1.100 MT<span>54.000 MB</span></button>
-    <button class="btn-pacote" onclick="abrirPedido('Mensal','2.000 MT – 105.000 MB')">2.000 MT<span>105.000 MB</span></button>
+    <button class="btn-pacote mensal" onclick="abrirPedido('Mensal','160 MT – 6.000 MB')">160 MT<span>6.000 MB</span></button>
+    <button class="btn-pacote mensal" onclick="abrirPedido('Mensal','300 MT – 13.000 MB')">300 MT<span>13.000 MB</span></button>
+    <button class="btn-pacote mensal" onclick="abrirPedido('Mensal','500 MT – 23.000 MB')">500 MT<span>23.000 MB</span></button>
+    <button class="btn-pacote mensal" onclick="abrirPedido('Mensal','1.100 MT – 54.000 MB')">1.100 MT<span>54.000 MB</span></button>
+    <button class="btn-pacote mensal" onclick="abrirPedido('Mensal','2.000 MT – 105.000 MB')">2.000 MT<span>105.000 MB</span></button>
 </div>
 
 <!-- FORMULÁRIO -->
