@@ -1,160 +1,222 @@
-   <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pacotes de Internet</title>
-
+<title>Pacotes Estilo App</title>
 <style>
-body {
-    font-family: Arial, sans-serif;
+/* RESET BÁSICO */
+* {
+    box-sizing: border-box;
     margin:0;
     padding:0;
-    background:#f4f6f8;
 }
 
+body {
+    font-family: Arial, sans-serif;
+    background:#f4f6f8;
+    display:flex;
+    justify-content:center;
+}
+
+/* CONTAINER MOBILE */
 .container {
-    max-width:420px;
-    margin:0 auto;
+    max-width: 420px;
+    width:100%;
     padding:16px;
 }
 
 /* TOPO PROMO */
 .topo-promo {
-    text-align:left;
     margin-bottom:20px;
 }
-.topo-promo .brow { color:red; font-size:28px; font-weight:800; letter-spacing:1px; }
-.topo-promo .meio { color:#000; font-size:18px; margin:4px 0; }
-.topo-promo .promo { color:#000; font-size:22px; font-weight:700; }
+.topo-promo .brow {
+    color:red;
+    font-size:28px;
+    font-weight:800;
+    letter-spacing:1px;
+}
+.topo-promo .meio {
+    color:#000;
+    font-size:18px;
+    margin:4px 0;
+}
+.topo-promo .promo {
+    color:#000;
+    font-size:22px;
+    font-weight:700;
+}
 
-/* TÍTULOS PACOTES */
-h2 { font-size:20px; margin-top:16px; }
+/* TÍTULOS */
+h2 {
+    font-size:20px;
+    margin:16px 0 12px 0;
+}
 
-/* PACOTES */
+/* PACOTES - BOTÕES ESTILO APP */
 .pacotes {
     display:flex;
     flex-direction:column;
-    gap:12px;
-    margin-top:12px;
+    gap:16px; /* espaçamento entre botões */
+    margin-bottom:20px;
 }
 
 .btn-pacote {
     background:#0d6efd;
     color:#fff;
     border:none;
-    border-radius:12px;
-    padding:18px;
-    font-size:17px;
-    line-height:1.4;
+    border-radius:16px;
+    padding:20px;
+    font-size:18px;
+    font-weight:600;
     display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
     text-align:center;
     cursor:pointer;
+    transition: transform 0.1s ease;
 }
 
-/* FORMULÁRIO */
+.btn-pacote span {
+    font-size:16px;
+    margin-top:4px;
+}
+
+/* BOTÃO EFEITO TOQUE */
+.btn-pacote:active {
+    transform: scale(0.97);
+}
+
+/* FORMULÁRIO ESTILO APP */
 .pedido {
     display:none;
     background:#fff;
     padding:20px;
-    margin-top:20px;
-    border-radius:12px;
-    box-shadow:0 4px 8px rgba(0,0,0,0.1);
+    border-radius:16px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    margin-bottom:20px;
 }
 
 .box-pagamento {
     background:#f1f5f9;
-    padding:12px;
-    border-radius:8px;
-    margin:15px 0;
+    padding:14px;
+    border-radius:10px;
+    margin:16px 0;
     font-size:15px;
 }
 
-.box-pagamento strong { display:block; margin-bottom:6px; }
+.box-pagamento strong {
+    display:block;
+    margin-bottom:6px;
+}
 
 input, textarea {
     width:100%;
-    padding:12px;
-    margin-top:8px;
-    border-radius:6px;
+    padding:14px;
+    margin-top:10px;
+    border-radius:10px;
     border:1px solid #ccc;
     font-size:16px;
 }
 
 .btn-pedido {
-    margin-top:15px;
+    margin-top:16px;
     width:100%;
     background:green;
     color:white;
     border:none;
-    padding:14px;
-    border-radius:12px;
-    font-size:16px;
+    padding:16px;
+    border-radius:16px;
+    font-size:18px;
+    font-weight:600;
     cursor:pointer;
+    transition: transform 0.1s ease;
+}
+
+.btn-pedido:active {
+    transform: scale(0.97);
 }
 </style>
 </head>
-
 <body>
+
 <div class="container">
 
-<!-- TOPO PROMO -->
-<div class="topo-promo">
-    <div class="brow">BROOW</div>
-    <div class="meio">TXECA LA ESSA</div>
-    <div class="promo">PROMO!</div>
-</div>
-
-<!-- PACOTES DIÁRIO -->
-<h2>📅 Pacote Diário (24hrs)</h2>
-<div class="pacotes">
-    <button class="btn-pacote" onclick="abrirPedido('Diário','20 MT – 1.100 MB')">20 MT<br>1.100 MB</button>
-    <button class="btn-pacote" onclick="abrirPedido('Diário','40 MT – 2.200 MB')">40 MT<br>2.200 MB</button>
-    <button class="btn-pacote" onclick="abrirPedido('Diário','60 MT – 3.300 MB')">60 MT<br>3.300 MB</button>
-    <button class="btn-pacote" onclick="abrirPedido('Diário','100 MT – 5.500 MB')">100 MT<br>5.500 MB</button>
-    <button class="btn-pacote" onclick="abrirPedido('Diário','200 MT – 11.000 MB')">200 MT<br>11.000 MB</button>
-</div>
-
-<!-- PACOTES MENSAL -->
-<h2>📆 Pacote Mensal (30 dias)</h2>
-<div class="pacotes">
-    <button class="btn-pacote" onclick="abrirPedido('Mensal','160 MT – 6.000 MB')">160 MT<br>6.000 MB</button>
-    <button class="btn-pacote" onclick="abrirPedido('Mensal','300 MT – 13.000 MB')">300 MT<br>13.000 MB</button>
-    <button class="btn-pacote" onclick="abrirPedido('Mensal','500 MT – 23.000 MB')">500 MT<br>23.000 MB</button>
-    <button class="btn-pacote" onclick="abrirPedido('Mensal','1.100 MT – 54.000 MB')">1.100 MT<br>54.000 MB</button>
-    <button class="btn-pacote" onclick="abrirPedido('Mensal','2.000 MT – 105.000 MB')">2.000 MT<br>105.000 MB</button>
-</div>
-
-<!-- FORMULÁRIO -->
-<div class="pedido" id="pedido">
-    <h3>📲 Fazer Pedido</h3>
-
-    <p><strong>Pacote selecionado:</strong><br><span id="tipoPacote"></span></p>
-    <p><strong>Oferta:</strong><br><span id="ofertaPacote"></span></p>
-
-    <!-- PAGAMENTO SÓ NA PÁGINA -->
-    <div class="box-pagamento">
-        <strong>💰 Pagamento</strong>
-        📲 <b>E-mola:</b> 870419940<br>
-        📲 <b>M-Pesa:</b> 849029376
+    <!-- TOPO PROMO -->
+    <div class="topo-promo">
+        <div class="brow">BROOW</div>
+        <div class="meio">TXECA LA ESSA</div>
+        <div class="promo">PROMO!</div>
     </div>
 
-    <label>Nome do cliente</label>
-    <input type="text" id="nomeCliente" placeholder="Ex: João Manuel">
+    <!-- PACOTES DIÁRIO -->
+    <h2>📅 Pacote Diário (24hrs)</h2>
+    <div class="pacotes">
+        <button class="btn-pacote" onclick="abrirPedido('Diário','20 MT – 1.100 MB')">
+            20 MT<span>1.100 MB</span>
+        </button>
+        <button class="btn-pacote" onclick="abrirPedido('Diário','40 MT – 2.200 MB')">
+            40 MT<span>2.200 MB</span>
+        </button>
+        <button class="btn-pacote" onclick="abrirPedido('Diário','60 MT – 3.300 MB')">
+            60 MT<span>3.300 MB</span>
+        </button>
+        <button class="btn-pacote" onclick="abrirPedido('Diário','100 MT – 5.500 MB')">
+            100 MT<span>5.500 MB</span>
+        </button>
+        <button class="btn-pacote" onclick="abrirPedido('Diário','200 MT – 11.000 MB')">
+            200 MT<span>11.000 MB</span>
+        </button>
+    </div>
 
-    <label>Número / Email para ativação</label>
-    <input type="text" id="numeroCliente" placeholder="Ex: 84xxxxxxx ou email@dominio.com">
+    <!-- PACOTES MENSAL -->
+    <h2>📆 Pacote Mensal (30 dias)</h2>
+    <div class="pacotes">
+        <button class="btn-pacote" onclick="abrirPedido('Mensal','160 MT – 6.000 MB')">
+            160 MT<span>6.000 MB</span>
+        </button>
+        <button class="btn-pacote" onclick="abrirPedido('Mensal','300 MT – 13.000 MB')">
+            300 MT<span>13.000 MB</span>
+        </button>
+        <button class="btn-pacote" onclick="abrirPedido('Mensal','500 MT – 23.000 MB')">
+            500 MT<span>23.000 MB</span>
+        </button>
+        <button class="btn-pacote" onclick="abrirPedido('Mensal','1.100 MT – 54.000 MB')">
+            1.100 MT<span>54.000 MB</span>
+        </button>
+        <button class="btn-pacote" onclick="abrirPedido('Mensal','2.000 MT – 105.000 MB')">
+            2.000 MT<span>105.000 MB</span>
+        </button>
+    </div>
 
-    <label>Mensagem de confirmação de pagamento</label>
-    <textarea id="confirmacao" rows="3" placeholder="Pagamento feito via M-Pesa / E-mola"></textarea>
+    <!-- FORMULÁRIO -->
+    <div class="pedido" id="pedido">
+        <h3>📲 Fazer Pedido</h3>
 
-    <button class="btn-pedido" onclick="enviarWhatsApp()">Fazer Pedido</button>
+        <p><strong>Pacote selecionado:</strong><br><span id="tipoPacote"></span></p>
+        <p><strong>Oferta:</strong><br><span id="ofertaPacote"></span></p>
+
+        <!-- PAGAMENTO SÓ NA PÁGINA -->
+        <div class="box-pagamento">
+            <strong>💰 Pagamento</strong>
+            📲 <b>E-mola:</b> 870419940<br>
+            📲 <b>M-Pesa:</b> 849029376
+        </div>
+
+        <label>Nome do cliente</label>
+        <input type="text" id="nomeCliente" placeholder="Ex: João Manuel">
+
+        <label>Número / Email para ativação</label>
+        <input type="text" id="numeroCliente" placeholder="Ex: 84xxxxxxx ou email@dominio.com">
+
+        <label>Mensagem de confirmação de pagamento</label>
+        <textarea id="confirmacao" rows="3" placeholder="Pagamento feito via M-Pesa / E-mola"></textarea>
+
+        <button class="btn-pedido" onclick="enviarWhatsApp()">Fazer Pedido</button>
+    </div>
+
 </div>
-
-</div> <!-- container -->
 
 <script>
 let tipoSelecionado = "";
@@ -196,4 +258,4 @@ function enviarWhatsApp(){
 </script>
 
 </body>
-</html> 
+</html>   
