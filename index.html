@@ -145,8 +145,8 @@ input, textarea {
 
     <div class="box-pagamento">
         <strong>💰 Pagamento</strong>
-        📲 <b>E-mola:</b> 870419940<br>
-        📲 <b>M-Pesa:</b> 849029376
+        📲 <b>E-mola:</b> 870419940 Elves mutombene<br>
+        📲 <b>M-Pesa:</b> 849029376 Elves mutombene
     </div>
 
     <label>Nome do cliente</label>
@@ -188,11 +188,11 @@ function enviarWhatsApp(){
 
     // Mensagem formatada com quebras de linha
     const mensagem = `*📦 NOVO PEDIDO*\n` +
-                     `👤 Cliente: ${nome}\n` +
-                     `📌 Pacote: ${tipoSelecionado}\n` +
-                     `🎁 Oferta: ${ofertaSelecionada}\n` +
-                     `📲 Contacto / Email: ${numero}\n` +
-                     `🧾 Confirmação: ${confirmacao}`;
+                     `👤 *Cliente:* ${nome}\n` +
+                     `📌 *Pacote:* ${tipoSelecionado}\n` +
+                     `🎁 *Oferta:* ${ofertaSelecionada}\n` +
+                     `📲 *Contacto:* ${numero}\n` +
+                     `🧾 *Confirmação de pagamento:* ${confirmacao}`;
 
     const whatsapp = "258870419940";
     const url = `https://wa.me/${whatsapp}?text=${encodeURIComponent(mensagem)}`;
