@@ -245,5 +245,170 @@ background:#eee;
   <div class="valor">150,00</div>
 </div>
 
+    
+<script>
+Chart.register(ChartDataLabels);
+
+// Vendas por hora (linha)
+const ctxHora = document.getElementById("graficoHora").getContext('2d');
+new Chart(ctxHora, {
+  type:'line',
+  data:{
+    labels:Array.from({length:24},(_,i)=>i+"h"),
+    datasets:[{
+      data:[15,0,0,0,0,8,0,0,0,0,13,1,0,2,5,0,0,0,0,0,0,0,18,1],
+      borderColor:'#ff6a00',
+      borderWidth:3,
+      pointRadius:0,
+      fill:false,
+      tension:0.4
+    }]
+  },
+  options:{
+    responsive:true,
+    maintainAspectRatio:false,
+    interaction:{mode:'index', intersect:false},
+    plugins:{legend:{display:false}}
+  }
+});
+
+// Vendas por pagamento (pizza)
+const ctxPag = document.getElementById("graficoPagamento").getContext('2d');
+new Chart(ctxPag, {
+  type:'pie',
+  data:{
+    labels:['M-Pesa','E-Mola'],
+    datasets:[{
+      data:[15,10],
+      backgroundColor:['#e60023','#ff8c00'],
+      borderWidth:0
+    }]
+  },
+  options:{
+    responsive:true,
+    maintainAspectRatio:false,
+    plugins:{
+      legend:{position:'bottom', labels:{color:'white', font:{size:14}}},
+      datalabels:{
+        color:'white',
+        font:{weight:'bold', size:14},
+        formatter:(value,context)=>{
+          const total = context.chart.data.datasets[0].data.reduce((a,b)=>a+b,0);
+          return ((value/total)*100).toFixed(0)+'%';
+        }
+      }
+    }
+  },
+  plugins:[ChartDataLabels]
+});
+  
+  
+  
+/* MENU */
+
+function openMenu(){
+document.getElementById("sidebar").classList.add("open")
+document.getElementById("menuBtn").style.display="none"
+}
+
+function closeMenu(){
+document.getElementById("sidebar").classList.remove("open")
+document.getElementById("menuBtn").style.display="block"
+}
+
+/* FILTRO */
+
+let data = new Date()
+
+function abrir(){
+let menu=document.getElementById("menu")
+menu.style.display=menu.style.display=="block"?"none":"block"
+}
+
+function setFiltro(t){
+document.getElementById("texto").innerText=t
+document.getElementById("menu").style.display="none"
+}
+
+function renderCalendario(){
+
+let ano=data.getFullYear()
+let mes=data.getMonth()
+
+let primeiroDia=new Date(ano,mes,1).getDay()
+if(primeiroDia==0){primeiroDia=7}
+primeiroDia--
+
+let diasMes=new Date(ano,mes+1,0).getDate()
+
+let nomesMes=["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"]
+
+document.getElementById("mes").innerText=nomesMes[mes]+" "+ano
+
+let diasHTML=""
+
+for(let i=0;i<primeiroDia;i++){diasHTML+="<div></div>"}
+
+for(let d=1;d<=diasMes;d++){
+diasHTML+=`<div class="dia" onclick="selecionarDia(${d})">${d}</div>`
+}
+
+document.getElementById("dias").innerHTML=diasHTML
+}
+
+function selecionarDia(d){
+  const dia = d.toString().padStart(2, '0'); // garante 2 dígitos
+  const mes = (data.getMonth() + 1).toString().padStart(2, '0'); // mês 1-12
+  const ano = data.getFullYear();
+  
+  document.getElementById("texto").innerText = `${dia}/${mes}/${ano}`;
+  document.getElementById("menu").style.display = "none";
+}
+
+function mesAnterior(){
+data.setMonth(data.getMonth()-1)
+renderCalendario()
+}
+
+function mesSeguinte(){
+data.setMonth(data.getMonth()+1)
+renderCalendario()
+}
+
+renderCalendario()
+
+/* GRAFICOS */
+
+Chart.register(ChartDataLabels)
+
+new Chart(document.getElementById("graficoHora"),{
+type:'line',
+data:{
+labels:Array.from({length:24},(_,i)=>i+"h"),
+datasets:[{
+data:[15,0,0,0,0,8,0,0,0,0,13,1,0,2,5,0,0,0,0,0,0,0,18,1],
+borderColor:'#ff6a00',
+borderWidth:3,
+pointRadius:0,
+fill:false,
+tension:0.4
+}]
+},
+options:{plugins:{legend:{display:false}}}
+})
+
+new Chart(document.getElementById("graficoPagamento"),{
+type:'pie',
+data:{
+labels:['M-Pesa','E-Mola'],
+datasets:[{
+data:[15,10],
+backgroundColor:['#e60023','#ff8c00']
+}]
+}
+})
+
+</script>
+
 </body>
 </html>
