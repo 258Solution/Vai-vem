@@ -1,175 +1,301 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt">
 <head>
+
 <meta charset="UTF-8">
 <title>Dashboard</title>
+
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
 <style>
+
+/* ================= BODY ================= */
+
 body{
-  background:#0f0f0f;
-  font-family:'Inter', Arial, sans-serif;
-  color:white;
-  margin:0;
-  padding:20px;
+background:#0f0f0f;
+font-family:'Inter', Arial, sans-serif;
+color:white;
+margin:0;
+padding-top:70px;
 }
 
-/* TÍTULO DASHBOARD */
-.titulo-dashboard {
-  font-size:28px;
-  font-weight:700;
-  margin-bottom:20px;
-  text-align:center;
+/* ================= MENU HAMBURGUER ================= */
+
+.menu-btn{
+position:fixed;
+top:15px;
+left:15px;
+font-size:30px;
+color:white;
+cursor:pointer;
+z-index:1002;
 }
 
-/* CARD */
+/* ================= SIDEBAR ================= */
+
+.sidebar{
+position:fixed;
+left:-270px;
+top:0;
+width:250px;
+height:100%;
+background:#111;
+transition:0.4s;
+z-index:1001;
+display:flex;
+flex-direction:column;
+}
+
+.sidebar.open{
+left:0;
+}
+
+.sidebar-header{
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:20px;
+border-bottom:3px solid orange;
+}
+
+.logo{
+font-size:23px;
+font-weight:700;
+display:flex;
+align-items:center;
+gap:6px;
+}
+
+.logo-icon{
+width:36px;
+height:36px;
+border:3px solid orange;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:7px;
+font-weight:bold;
+}
+
+/* ================= LINKS MENU ================= */
+
+.sidebar a{
+display:flex;
+align-items:center;
+padding:14px 22px;
+color:#ccc;
+text-decoration:none;
+font-size:19px;
+}
+
+.sidebar a i{
+margin-right:10px;
+}
+
+.sidebar a:hover{
+background:#1f1f1f;
+color:white;
+}
+
+/* ================= CARDS ================= */
+
 .card{
-  background:#151515;
-  width:95%;
-  max-width:850px;
-    height:210px;
-  margin:20px auto;
-  padding:25px;
-  border-radius:17px;
-  box-shadow:0 4px 10px rgba(0,0,0,0.5);
+background:#151515;
+width:95%;
+max-width:850px;
+padding:18px;
+border-radius:8px;
+margin:12px auto;
+box-shadow:0 4px 10px rgba(0,0,0,0.5);
+}
+  .card .titulo {
+  display: flex;
+  align-items: center; /* alinha ícone e título verticalmente */
+  gap: 8px;            /* espaço entre ícone e título */
+  color: #b0b0b0;      /* cinza visível para título */
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+
+.card .titulo i {
+  font-size: 30px;     /* tamanho do ícone */
+  margin-top: 3px;     /* desce levemente só o ícone */
+  color: #b0b0b0;      /* cor do ícone */
+}
+  
+  .valor{
+  font-weight:700;
+  font-size:20px;
+  color:white;
   text-align:left;
 }
-
-.card .titulo {
-  display:flex;
-  align-items:center;
-  gap:12px;
-  font-size:50px;
-  color:#b0b0b0;
-  margin-bottom:15px;
+  
+.sacar{
+display:inline-block;
+margin-top:8px;
+color:#16a34a;
+text-decoration:none;
 }
 
-.card .titulo i{
-  font-size:70px;
-  color:#b0b0b0;
+/* ================= GRAFICOS ================= */
+
+h2{
+margin-bottom:12px;
+padding-left:8px;
 }
 
-.valor{
-  font-size:50px;
-  font-weight:700;
-  color:white;
+.grafico-container{
+width:95%;
+height:850px;
+margin:auto;
 }
 
-    .sacar{
-  display: inline-block;
-  margin-top: 8px;
-  color: #16a34a;
-  text-decoration: none;
-  font-size: 50px; /* aumenta o tamanho da fonte */
+.divider{
+height:1px;
+background:#444;
+margin:20px 0;
 }
-/* FILTRO E MENU AJUSTADOS */
+
+/* ================= FILTRO DATA ================= */
+
 .filtro{
-  position:relative;
-  width:95%;
-  max-width:850px;
-  margin:12px auto;
+position:relative;
+width:95px;
+margin:12px auto;
 }
 
-/* botão do filtro */
 .botao{
-  height:70px; /* altura grande, mas proporcional */
-  font-size:22px; /* texto grande, mas não exagerado */
-  background:#151515;
-  border:1px solid #444;
-  padding:0 15px;
-  border-radius:17px;
-  cursor:pointer;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  color:white;
+background:#151515;
+border:1px solid #444;
+padding:12px;
+border-radius:8px;
+cursor:pointer;
+display:flex;
+justify-content:space-between;
+align-items:center;
+color:white;
 }
 
-/* menu dropdown */
 .menu{
-  display:none;
-  position:absolute;
-  top:80px; /* abaixo do botão */
-  left:0;
-  width:100%;
-  max-width:850px;
-  background:#151515;
-  border:1px solid #444;
-  border-radius:10px;
-  box-shadow:0 5px 20px rgba(0,0,0,0.5);
-  padding:10px;
-  color:#b0b0b0;
-  font-size:18px; /* tamanho legível, sem exagero */
-  z-index:100;
-    max-height:500px;
+display:none;
+position:absolute;
+top:45px;
+background:#151515;
+border:1px solid #444;
+border-radius:10px;
+box-shadow:0 5px 20px rgba(0,0,0,0.5);
+width:95%;
+padding:10px;
+color:#b0b0b09;
+}
+
 .opcao{
-  padding:10px;
-  cursor:pointer;
-  border-radius:6px;
+padding:10px;
+cursor:pointer;
+border-radius:6px;
 }
+
 .opcao:hover{
-  background:#333;
+background:#f2f2f2;
 }
 
-/* calendário */
 .calendario{
-  margin-top:15px;
-  border-top:1px solid orange;
-  padding-top:10px;
-    height:350px
+margin-top:15px;
+border-top:1px solid orange;
+padding-top:10px;
 }
+  
 
-/* cabeçalho do calendário */
+  
 .header-cal{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:10px;
-}
-.header-cal i{
-  font-size:22px; /* setinhas menores */
-  cursor:pointer;
-  color:orange;
-  transition:0.2s;
-}
-.header-cal i:hover{
-  color:#ffb84d;
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:10px;
 }
 
-/* dias da semana */
 .semana{
-  display:grid;
-  grid-template-columns:repeat(7,1fr);
-  text-align:center;
-  font-size:14px;
-  color:#b0b0b0;
+display:grid;
+grid-template-columns:repeat(7,1fr);
+text-align:center;
+font-size:12px;
+color: #b0b0b0;
 }
+
 .dias{
-  display:grid;
-  grid-template-columns:repeat(7,1fr);
-  gap:5px;
-  text-align:center;
+display:grid;
+grid-template-columns:repeat(7,1fr);
+gap:5px;
+text-align:center;
 }
+
 .dia{
-  padding:8px;
-  border-radius:6px;
-  cursor:pointer;
-  background:#1a1a1a;
-  color:white;
+padding:8px;
+border-radius:6px;
+cursor:pointer;
 }
+
 .dia:hover{
-  background:#333;
+background:#eee;
 }
-    
+  
+  .botao i{
+  margin-left:8px;
+  font-size:19px;
+  color:orange;
+}
+  
+  .header-cal i {
+  cursor: pointer;
+  font-size: 18px;
+  color: orange;
+  padding: 5px;
+  transition: 0.2s;
+}
+
+.header-cal i:hover {
+  color: #ffb84d;
+}
+  
+ 
+
 </style>
 </head>
+
 <body>
 
-<div class="titulo-dashboard">Dashboard</div>
+<!-- MENU -->
+<i class="fas fa-bars menu-btn" id="menuBtn" onclick="openMenu()"></i>
 
-    <div class="filtro">
+<div class="sidebar" id="sidebar">
+
+<div class="sidebar-header">
+<div class="logo">
+<div class="logo-icon">V</div>
+Vendoo
+</div>
+<i class="fas fa-times" onclick="closeMenu()"></i>
+</div>
+
+<a href="#"><i class="fas fa-chart-line"></i>Dashboard</a>
+<a href="#"><i class="fas fa-box"></i>Produtos</a>
+<a href="#"><i class="fas fa-chart-pie"></i>Relatórios</a>
+<a href="#"><i class="fas fa-wallet"></i>Financeiro</a>
+<a href="#"><i class="fas fa-users"></i>Afiliados</a>
+
+</div>
+
+<!-- FILTRO DATA -->
+
+<div class="filtro">
 
 <div class="botao" onclick="abrir()">
 <span id="texto">Hoje</span>
@@ -207,8 +333,9 @@ body{
 </div>
 </div>
 
-    
-    <div class="card">
+<!-- CARDS -->
+
+<div class="card">
   <div class="titulo">
     <i class="fas fa-wallet"></i>
     <span>Saldo disponível</span>
@@ -241,7 +368,22 @@ body{
   <div class="valor">150,00</div>
 </div>
 
-    
+<div class="card">
+
+<h2>Vendas por Hora</h2>
+<div class="grafico-container">
+<canvas id="graficoHora"></canvas>
+</div>
+
+<div class="divider"></div>
+
+<h2>Vendas por Pagamento</h2>
+<div class="grafico-container">
+<canvas id="graficoPagamento"></canvas>
+</div>
+
+</div>
+
 <script>
 Chart.register(ChartDataLabels);
 
