@@ -2,210 +2,430 @@
 <html lang="pt">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pacotes de Internet - App Mobile</title>
+<title>Dashboard</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
 <style>
-* { box-sizing:border-box; margin:0; padding:0; }
-
-body {
-    font-family: Arial, sans-serif;
-    background:#f4f6f8;
-    padding:16px 0;
+/* ================= BODY ================= */
+body{
+  background:#0f0f0f;
+  font-family:'Inter', Arial, sans-serif;
+  color:white;
+  margin:0;
+  padding-top:70px;
 }
 
-/* CONTAINER */
-.container {
-    width:100%;
-    padding:0 12px;
+/* ================= MENU HAMBURGUER ================= */
+.menu-btn{
+  position:fixed;
+  top:15px;
+  left:15px;
+  font-size:30px;
+  color:white;
+  cursor:pointer;
+  z-index:1002;
 }
 
-/* TOPO PROMO */
-.topo-promo {
-    text-align:left;
-    margin-bottom:20px;
+/* ================= SIDEBAR ================= */
+.sidebar{
+  position:fixed;
+  left:-270px;
+  top:0;
+  width:250px;
+  height:100%;
+  background:#111;
+  transition:0.4s;
+  z-index:1001;
+  display:flex;
+  flex-direction:column;
 }
-.topo-promo .brow { color:red; font-size:28px; font-weight:800; }
-.topo-promo .meio { color:#000; font-size:18px; margin:4px 0; font-weight:600; }
-.topo-promo .promo { color:#000; font-size:22px; font-weight:700; }
+.sidebar.open{ left:0; }
 
-/* TÍTULOS */
-h2 { font-size:20px; margin:16px 0 12px 0; }
-
-/* CARD PACOTES */
-.card {
-    background:#fff;
-    border-radius:16px;
-    padding:16px;
-    margin-bottom:20px;
+.sidebar-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:20px;
+  border-bottom:3px solid orange;
 }
 
-/* BOTÕES PACOTE */
-.btn-pacote {
-    display:block;
-    width:100%;
-    padding:18px;
-    margin-bottom:12px;
-    font-size:18px;
-    font-weight:600;
-    text-align:center;
-    color:#fff;
-    border:none;
-    border-radius:12px;
-    cursor:pointer;
-    transition: transform 0.1s ease;
+.logo{
+  font-size:23px;
+  font-weight:700;
+  display:flex;
+  align-items:center;
+  gap:6px;
 }
-.btn-pacote span { display:block; font-size:16px; margin-top:4px; font-weight:500; }
-.btn-pacote:active { transform: scale(0.97); }
 
-/* CORES POR TIPO */
-.diario { background:#0d6efd; }   /* Azul Diário */
-.mensal { background:#ff9f1c; }   /* Laranja Mensal */
+.logo-icon{
+  width:36px;
+  height:36px;
+  border:3px solid orange;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:7px;
+  font-weight:bold;
+}
 
-/* FORMULÁRIO */
-.pedido {
-    display:none;
-    background:#fff;
-    padding:20px;
-    border-radius:16px;
-    margin-bottom:30px;
+/* ================= LINKS MENU ================= */
+.sidebar a{
+  display:flex;
+  align-items:center;
+  padding:14px 22px;
+  color:#ccc;
+  text-decoration:none;
+  font-size:19px;
 }
-.pedido label { font-weight:600; margin-top:10px; display:block; }
-input, textarea {
-    width:100%;
-    padding:14px;
-    margin-top:6px;
-    border-radius:12px;
-    border:1px solid #ccc;
-    font-size:16px;
-}
-.btn-pedido {
-    width:100%;
-    background:green;
-    color:#fff;
-    border:none;
-    padding:16px;
-    border-radius:16px;
-    font-size:18px;
-    font-weight:700;
-    cursor:pointer;
-    margin-top:16px;
-    transition: transform 0.1s ease;
-}
-.btn-pedido:active { transform: scale(0.97); }
+.sidebar a i{ margin-right:10px; }
+.sidebar a:hover{ background:#1f1f1f; color:white; }
 
-/* PAGAMENTO */
-.box-pagamento {
-    background:#f1f5f9;
-    padding:14px;
-    border-radius:12px;
-    margin:16px 0;
-    font-size:15px;
+/* ================= CARDS ================= */
+.card{
+  background:#151515;
+  width:80%;
+  max-width:350px;
+  padding:15px;
+  border-radius:8px;
+  margin:12px auto;
+  box-shadow:0 4px 10px rgba(0,0,0,0.5);
 }
-.box-pagamento strong { display:block; margin-bottom:6px; }
 
+.card .titulo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #b0b0b0;
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+
+.card .titulo i {
+  font-size: 27px;
+  margin-top: 3px;
+  color: #b0b0b0;
+}
+
+.valor{
+  font-weight:700;
+  font-size:20px;
+  color:white;
+  text-align:left;
+}
+
+.sacar{
+  display:inline-block;
+  margin-top:8px;
+  color:#16a34a;
+  text-decoration:none;
+}
+
+/* ================= GRAFICOS ================= */
+h2{
+  margin-bottom:12px;
+  padding-left:8px;
+}
+
+.grafico-container{
+  width:90%;
+  height:200px;
+  margin:auto;
+}
+
+.divider{
+  height:1px;
+  background:#444;
+  margin:20px 0;
+}
+
+/* ================= FILTRO DATA ================= */
+.filtro{
+  position: relative;
+  width: 320px;
+  margin: 12px auto;
+}
+
+.botao {
+  background: #151515;
+  border: 1px solid #444;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color:#b0b0b0;
+}
+
+.menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 400px;
+  background: #151515;
+  border: 1px solid #444;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+  padding: 12px;
+  color: white;
+  z-index: 100;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  max-height: 0;
+}
+
+.menu.ativo{
+  display:block;
+  max-height: 1000px;
+}
+
+/* Opções dentro do menu */
+.opcao {
+  padding: 8px 10px;
+  cursor: pointer;
+  border-radius: 6px;
+}
+.opcao:hover { background: #333; }
+
+/* Calendário */
+.calendario {
+  margin-top: 12px;
+  border-top: 1px solid orange;
+  padding-top: 10px;
+}
+
+.header-cal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.header-cal i {
+  cursor: pointer;
+  font-size: 18px;
+  color: orange;
+}
+
+.semana {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-size: 12px;
+  color: #777;
+}
+
+.dias {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+  text-align: center;
+  margin-top: 5px;
+}
+
+.dia {
+  padding: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.dia:hover { background: #eee; }
+  .titulo-dashboard {
+  color:white;
+  font-size:28px;
+  font-weight:700;
+  margin:25px  20px 20px; /* topo, direita, baixo, esquerda */
+}
+  
 </style>
 </head>
 <body>
+  
+  <div class="titulo-dashboard">Dashboard</div>
 
-<div class="container">
+<!-- MENU -->
+<i class="fas fa-bars menu-btn" id="menuBtn" onclick="openMenu()"></i>
 
-<!-- TOPO PROMO -->
-<div class="topo-promo">
-    <div class="brow">BROOW</div>
-    <div class="meio">TXECA LA ESSA</div>
-    <div class="promo">PROMO!</div>
-</div>
-
-<!-- PACOTES DIÁRIO -->
-<h2>📦 Pacote Diário (24hrs)</h2>
-<div class="card">
-    <button class="btn-pacote diario" onclick="abrirPedido('Diário','20 MT – 1.100 MB')">20 MT<span>1.100 MB</span></button>
-    <button class="btn-pacote diario" onclick="abrirPedido('Diário','40 MT – 2.200 MB')">40 MT<span>2.200 MB</span></button>
-    <button class="btn-pacote diario" onclick="abrirPedido('Diário','60 MT – 3.300 MB')">60 MT<span>3.300 MB</span></button>
-    <button class="btn-pacote diario" onclick="abrirPedido('Diário','100 MT – 5.500 MB')">100 MT<span>5.500 MB</span></button>
-    <button class="btn-pacote diario" onclick="abrirPedido('Diário','200 MT – 11.000 MB')">200 MT<span>11.000 MB</span></button>
-</div>
-
-<!-- PACOTES MENSAL (visíveis, mas a pessoa rola para ver) -->
-<h2>📆 Pacote Mensal (30 dias)</h2>
-<div class="card">
-    <button class="btn-pacote mensal" onclick="abrirPedido('Mensal','160 MT – 6.000 MB')">160 MT<span>6.000 MB</span></button>
-    <button class="btn-pacote mensal" onclick="abrirPedido('Mensal','300 MT – 13.000 MB')">300 MT<span>13.000 MB</span></button>
-    <button class="btn-pacote mensal" onclick="abrirPedido('Mensal','500 MT – 23.000 MB')">500 MT<span>23.000 MB</span></button>
-    <button class="btn-pacote mensal" onclick="abrirPedido('Mensal','1.100 MT – 54.000 MB')">1.100 MT<span>54.000 MB</span></button>
-    <button class="btn-pacote mensal" onclick="abrirPedido('Mensal','2.000 MT – 105.000 MB')">2.000 MT<span>105.000 MB</span></button>
-</div>
-
-<!-- FORMULÁRIO (aparece ao clicar no botão de pacote) -->
-<div class="pedido" id="pedido">
-    <h3>📲 Fazer Pedido</h3>
-
-    <p><strong>Pacote selecionado:</strong><br><span id="tipoPacote"></span></p>
-    <p><strong>Oferta:</strong><br><span id="ofertaPacote"></span></p>
-
-    <div class="box-pagamento">
-        <strong>💰Meios de Pagamento</strong>
-        📲 <b>E-mola:</b> 870419940—Elves mutombene<br>
-        📲 <b>M-Pesa:</b> 849029376—Elves mutombene
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="logo">
+      <div class="logo-icon">V</div>
+      Vendoo
     </div>
+    <i class="fas fa-times" onclick="closeMenu()"></i>
+  </div>
 
-    <label>Nome do cliente</label>
-    <input type="text" id="nomeCliente" placeholder="Ex: João Manuel">
-
-    <label>Coloque aqui o Número para receber os megas </label>
-    <input type="text" id="numeroCliente" placeholder="Ex: 84xxxxxxx">
-
-    <label>Cole aqui a Mensagem de confirmação de pagamento</label>
-    <textarea id="confirmacao" rows="3" placeholder="Pagamento feito via M-Pesa / E-mola"></textarea>
-
-    <button class="btn-pedido" onclick="enviarWhatsApp()">Fazer Pedido</button>
+  <a href="#"><i class="fas fa-chart-line"></i>Dashboard</a>
+  <a href="#"><i class="fas fa-box"></i>Produtos</a>
+  <a href="#"><i class="fas fa-chart-pie"></i>Relatórios</a>
+  <a href="#"><i class="fas fa-wallet"></i>Financeiro</a>
+  <a href="#"><i class="fas fa-users"></i>Afiliados</a>
 </div>
 
+<!-- FILTRO DATA -->
+<div class="filtro">
+  <div class="botao" onclick="abrir()">
+    <span id="texto">Hoje</span>
+    <i class="fas fa-chevron-down"></i>
+  </div>
+
+  <div class="menu" id="menu">
+    <div class="opcao" onclick="setFiltro('Hoje')">Hoje</div>
+    <div class="opcao" onclick="setFiltro('Últimos 7 dias')">Últimos 7 dias</div>
+    <div class="opcao" onclick="setFiltro('Últimos 30 dias')">Últimos 30 dias</div>
+    <div class="opcao" onclick="setFiltro('Tempo todo')">Tempo todo</div>
+
+    <div class="calendario">
+      <div class="header-cal">
+        <i class="fas fa-chevron-left" onclick="mesAnterior()"></i>
+        <span id="mes"></span>
+        <i class="fas fa-chevron-right" onclick="mesSeguinte()"></i>
+      </div>
+
+      <div class="semana">
+        <div>Seg</div><div>Ter</div><div>Qua</div>
+        <div>Qui</div><div>Sex</div><div>Sáb</div><div>Dom</div>
+      </div>
+
+      <div class="dias" id="dias"></div>
+    </div>
+  </div>
+</div>
+
+<!-- CARDS -->
+<div class="card">
+  <div class="titulo"><i class="fas fa-wallet"></i><span>Saldo disponível</span></div>
+  <div class="valor">Mt$ 100,000.00</div>
+  <a class="sacar" href="#">Sacar →</a>
+</div>
+
+<div class="card">
+  <div class="titulo"><i class="fas fa-cart-shopping"></i><span>vendas realizadas</span></div>
+  <div class="valor">45</div>
+</div>
+
+  
+<div class="card">
+  <div class="titulo"><i class="fas fa-hourglass-half"></i><span>Pendentes</span></div>
+  <div class="valor">3</div>
+</div>
+  
+<div class="card">
+  <div class="titulo"><i class="fas fa-chart-line"></i><span>Taxa de conversão</span></div>
+  <div class="valor">5,5%</div>
+</div>
+
+<div class="card">
+  <div class="titulo"><i class="fas fa-money-bill-wave"></i><span>Ticket médio</span></div>
+  <div class="valor">150,00</div>
+</div>
+
+<div class="card">
+<h2>Vendas por Hora</h2>
+<div class="grafico-container"><canvas id="graficoHora"></canvas></div>
+<div class="divider"></div>
+<h2>Vendas por Pagamento</h2>
+<div class="grafico-container"><canvas id="graficoPagamento"></canvas></div>
 </div>
 
 <script>
-let tipoSelecionado = "";
-let ofertaSelecionada = "";
+Chart.register(ChartDataLabels);
 
-function abrirPedido(tipo, oferta){
-    tipoSelecionado = tipo;
-    ofertaSelecionada = oferta;
-    document.getElementById("tipoPacote").innerText = tipo;
-    document.getElementById("ofertaPacote").innerText = oferta;
-    document.getElementById("pedido").style.display = "block";
-    document.getElementById("pedido").scrollIntoView({ behavior: "smooth", block: "start" });
-}
+// GRÁFICOS
+const ctxHora = document.getElementById("graficoHora").getContext('2d');
+new Chart(ctxHora,{
+  type:'line',
+  data:{
+    labels:Array.from({length:24},(_,i)=>i+"h"),
+    datasets:[{data:[15,0,0,0,0,8,0,0,0,0,13,1,0,2,5,0,0,0,0,0,0,0,18,1],
+    borderColor:'#ff6a00', borderWidth:3, pointRadius:0, fill:false, tension:0.4}]
+  },
+  options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}}
+});
 
-function enviarWhatsApp(){
-    const nome = document.getElementById("nomeCliente").value;
-    const numero = document.getElementById("numeroCliente").value;
-    const confirmacao = document.getElementById("confirmacao").value;
-
-    if(nome === "" || numero === "" || confirmacao === ""){
-        alert("Preencha todos os campos!");
-        return;
+const ctxPag = document.getElementById("graficoPagamento").getContext('2d');
+new Chart(ctxPag,{
+  type:'pie',
+  data:{labels:['M-Pesa','E-Mola'], datasets:[{data:[15,10], backgroundColor:['#e60023','#ff8c00'], borderWidth:0}]},
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    plugins:{
+      legend:{position:'bottom', labels:{color:'white', font:{size:14}}},
+      datalabels:{
+        color:'white', font:{weight:'bold', size:14},
+        formatter:(value,ctx)=>{const total=ctx.chart.data.datasets[0].data.reduce((a,b)=>a+b,0); return ((value/total)*100).toFixed(0)+'%';}
+      }
     }
+  },
+  plugins:[ChartDataLabels]
+});
 
-    // Mensagem formatada com quebras de linha
-    const mensagem = `*✔️ NOVO PEDIDO*\n` +
-                     `👤 *Cliente:* ${nome}\n` +
-                     `📌 *Pacote:* ${tipoSelecionado}\n` +
-                     `📶 *Oferta:* ${ofertaSelecionada}\n` +
-                     `📞 *Contacto:* ${numero}\n` +
-                     `🧾 *Confirmação de pagamento:* ${confirmacao}`;
+// MENU
+function openMenu(){ document.getElementById("sidebar").classList.add("open"); document.getElementById("menuBtn").style.display="none"; }
+function closeMenu(){ document.getElementById("sidebar").classList.remove("open"); document.getElementById("menuBtn").style.display="block"; }
 
-    const whatsapp = "258870419940";
-    const url = `https://wa.me/${whatsapp}?text=${encodeURIComponent(mensagem)}`;
-    window.open(url, "_blank");
+// FILTRO
+let data = new Date();
+let menuAberto = false;
 
-    // LIMPAR FORMULÁRIO E OCULTAR
-    document.getElementById("nomeCliente").value = "";
-    document.getElementById("numeroCliente").value = "";
-    document.getElementById("confirmacao").value = "";
-    document.getElementById("pedido").style.display = "none";
+function abrir(){
+  const menu = document.getElementById("menu");
+  menuAberto = !menuAberto;
+  menu.classList.toggle("ativo", menuAberto);
 }
+
+document.addEventListener("click", function(e){
+  const menu = document.getElementById("menu");
+  const botao = document.querySelector(".botao");
+  if(menuAberto && !menu.contains(e.target) && !botao.contains(e.target)){
+    menu.classList.remove("ativo");
+    menuAberto=false;
+  }
+});
+
+function setFiltro(t){
+  document.getElementById("texto").innerText=t;
+  document.getElementById("menu").classList.remove("ativo");
+  menuAberto=false;
+}
+
+function renderCalendario(){
+  let ano = data.getFullYear(), mes = data.getMonth();
+  let primeiroDia = new Date(ano, mes, 1).getDay(); if(primeiroDia==0){primeiroDia=7} primeiroDia--;
+  let diasMes = new Date(ano, mes+1, 0).getDate();
+  let nomesMes=["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
+  document.getElementById("mes").innerText = nomesMes[mes]+" "+ano;
+
+  let diasHTML="";
+  for(let i=0;i<primeiroDia;i++){ diasHTML+="<div></div>"; }
+  for(let d=1; d<=diasMes; d++){ diasHTML+=`<div class="dia" onclick="selecionarDia(${d})">${d}</div>`; }
+  document.getElementById("dias").innerHTML=diasHTML;
+}
+
+function selecionarDia(d){
+  const dia = d.toString().padStart(2,'0');
+  const mes = (data.getMonth()+1).toString().padStart(2,'0');
+  const ano = data.getFullYear();
+  document.getElementById("texto").innerText = `${dia}/${mes}/${ano}`;
+  document.getElementById("menu").classList.remove("ativo");
+  menuAberto=false;
+}
+
+function mesAnterior(){ data.setMonth(data.getMonth()-1); renderCalendario(); }
+function mesSeguinte(){ data.setMonth(data.getMonth()+1); renderCalendario(); }
+
+renderCalendario();
 </script>
-
-
 </body>
 </html>
