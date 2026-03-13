@@ -1,429 +1,70 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="pt">
 <head>
 <meta charset="UTF-8">
 <title>Dashboard</title>
-
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-<!-- Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
-
 <style>
-/* ================= BODY ================= */
 body{
   background:#0f0f0f;
   font-family:'Inter', Arial, sans-serif;
   color:white;
   margin:0;
-  padding-top:70px;
-}
-
-/* ================= MENU HAMBURGUER ================= */
-.menu-btn{
-  position:fixed;
-  top:15px;
-  left:15px;
-  font-size:30px;
-  color:white;
-  cursor:pointer;
-  z-index:1002;
-}
-
-/* ================= SIDEBAR ================= */
-.sidebar{
-  position:fixed;
-  left:-270px;
-  top:0;
-  width:250px;
-  height:100%;
-  background:#111;
-  transition:0.4s;
-  z-index:1001;
-  display:flex;
-  flex-direction:column;
-}
-.sidebar.open{ left:0; }
-
-.sidebar-header{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
   padding:20px;
-  border-bottom:3px solid orange;
 }
 
-.logo{
-  font-size:23px;
+/* TÍTULO DASHBOARD */
+.titulo-dashboard {
+  font-size:28px;
   font-weight:700;
-  display:flex;
-  align-items:center;
-  gap:6px;
+  margin-bottom:20px;
+  text-align:center;
 }
 
-.logo-icon{
-  width:36px;
-  height:36px;
-  border:3px solid orange;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:7px;
-  font-weight:bold;
-}
-
-/* ================= LINKS MENU ================= */
-.sidebar a{
-  display:flex;
-  align-items:center;
-  padding:14px 22px;
-  color:#ccc;
-  text-decoration:none;
-  font-size:19px;
-}
-.sidebar a i{ margin-right:10px; }
-.sidebar a:hover{ background:#1f1f1f; color:white; }
-=========== GRAFICOS ================= */
-h2{
-  margin-bottom:12px;
-  padding-left:8px;
-}
-
-/* ================= CARDS ================= */
+/* CARD */
 .card{
   background:#151515;
-  width:92%;
-  max-width:420px;
-  padding:16px;
-  border-radius:10px;
-  margin:14px auto;
-  box-shadow:0 4px 12px rgba(0,0,0,0.5);
+  width:100%;
+  max-width:350px;
+  margin:0 auto;
+  padding:25px;
+  border-radius:8px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.5);
+  text-align:left;
 }
 
-.card .titulo{
+.card .titulo {
   display:flex;
   align-items:center;
-  gap:8px;
+  gap:12px;
+  font-size:20px;
   color:#b0b0b0;
-  font-size:17px;
-  margin-bottom:6px;
+  margin-bottom:15px;
 }
 
 .card .titulo i{
-  font-size:24px;
+  font-size:30px;
   color:#b0b0b0;
 }
 
 .valor{
+  font-size:24px;
   font-weight:700;
-  font-size:21px;
   color:white;
 }
-
-.sacar{
-  display:inline-block;
-  margin-top:8px;
-  color:#16a34a;
-  text-decoration:none;
-}
-
-/* ================= GRAFICOS ================= */
-
-.grafico-container{
-  width:100%;
-  height:220px;
-}
-
-.divider{
-  height:1px;
-  background:#444;
-  margin:20px 0;
-}
-
-/* ================= FILTRO DATA ================= */
-.filtro{
-  position: relative;
-  width: 320px;
-  margin: 12px auto;
-}
-
-.botao {
-  background: #151515;
-  border: 1px solid #444;
-  padding: 12px;
-  border-radius: 8px;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color:#b0b0b0;
-}
-
-.menu {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 90%;
-  max-width: 400px;
-  background: #151515;
-  border: 1px solid #444;
-  border-radius: 10px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.5);
-  padding: 12px;
-  color: white;
-  z-index: 100;
-  overflow: hidden;
-  transition: max-height 0.3s ease;
-  max-height: 0;
-}
-
-.menu.ativo{
-  display:block;
-  max-height: 1000px;
-}
-
-/* Opções dentro do menu */
-.opcao {
-  padding: 8px 10px;
-  cursor: pointer;
-  border-radius: 6px;
-}
-.opcao:hover { background: #333; }
-
-/* Calendário */
-.calendario {
-  margin-top: 12px;
-  border-top: 1px solid orange;
-  padding-top: 10px;
-}
-
-.header-cal {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.header-cal i {
-  cursor: pointer;
-  font-size: 18px;
-  color: orange;
-}
-
-.semana {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  text-align: center;
-  font-size: 12px;
-  color: #777;
-}
-
-.dias {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 5px;
-  text-align: center;
-  margin-top: 5px;
-}
-
-.dia {
-  padding: 8px;
-  border-radius: 6px;
-  cursor: pointer;
-}
-.dia:hover { background: #eee; }
-  .titulo-dashboard {
-  color:white;
-  font-size:28px;
-  font-weight:700;
-  margin:25px  20px 20px; /* topo, direita, baixo, esquerda */
-}
-  
 </style>
 </head>
 <body>
-  
-  <div class="titulo-dashboard">Dashboard</div>
 
-<!-- MENU -->
-<i class="fas fa-bars menu-btn" id="menuBtn" onclick="openMenu()"></i>
+<div class="titulo-dashboard">Dashboard</div>
 
-<div class="sidebar" id="sidebar">
-  <div class="sidebar-header">
-    <div class="logo">
-      <div class="logo-icon">V</div>
-      Vendoo
-    </div>
-    <i class="fas fa-times" onclick="closeMenu()"></i>
-  </div>
-
-  <a href="#"><i class="fas fa-chart-line"></i>Dashboard</a>
-  <a href="#"><i class="fas fa-box"></i>Produtos</a>
-  <a href="#"><i class="fas fa-chart-pie"></i>Relatórios</a>
-  <a href="#"><i class="fas fa-wallet"></i>Financeiro</a>
-  <a href="#"><i class="fas fa-users"></i>Afiliados</a>
-</div>
-
-<!-- FILTRO DATA -->
-<div class="filtro">
-  <div class="botao" onclick="abrir()">
-    <span id="texto">Hoje</span>
-    <i class="fas fa-chevron-down"></i>
-  </div>
-
-  <div class="menu" id="menu">
-    <div class="opcao" onclick="setFiltro('Hoje')">Hoje</div>
-    <div class="opcao" onclick="setFiltro('Últimos 7 dias')">Últimos 7 dias</div>
-    <div class="opcao" onclick="setFiltro('Últimos 30 dias')">Últimos 30 dias</div>
-    <div class="opcao" onclick="setFiltro('Tempo todo')">Tempo todo</div>
-
-    <div class="calendario">
-      <div class="header-cal">
-        <i class="fas fa-chevron-left" onclick="mesAnterior()"></i>
-        <span id="mes"></span>
-        <i class="fas fa-chevron-right" onclick="mesSeguinte()"></i>
-      </div>
-
-      <div class="semana">
-        <div>Seg</div><div>Ter</div><div>Qua</div>
-        <div>Qui</div><div>Sex</div><div>Sáb</div><div>Dom</div>
-      </div>
-
-      <div class="dias" id="dias"></div>
-    </div>
-  </div>
-</div>
-
-<!-- CARDS -->
 <div class="card">
   <div class="titulo"><i class="fas fa-wallet"></i><span>Saldo disponível</span></div>
   <div class="valor">Mt$ 100,000.00</div>
-  <a class="sacar" href="#">Sacar →</a>
 </div>
 
-<div class="card">
-  <div class="titulo"><i class="fas fa-cart-shopping"></i><span>vendas realizadas</span></div>
-  <div class="valor">45</div>
-</div>
-
-  
-<div class="card">
-  <div class="titulo"><i class="fas fa-hourglass-half"></i><span>Pendentes</span></div>
-  <div class="valor">3</div>
-</div>
-  
-<div class="card">
-  <div class="titulo"><i class="fas fa-chart-line"></i><span>Taxa de conversão</span></div>
-  <div class="valor">5,5%</div>
-</div>
-
-<div class="card">
-  <div class="titulo"><i class="fas fa-money-bill-wave"></i><span>Ticket médio</span></div>
-  <div class="valor">150,00</div>
-</div>
-
-<div class="card">
-<h2>Vendas por Hora</h2>
-<div class="grafico-container"><canvas id="graficoHora"></canvas></div>
-<div class="divider"></div>
-<h2>Vendas por Pagamento</h2>
-<div class="grafico-container"><canvas id="graficoPagamento"></canvas></div>
-</div>
-
-<script>
-Chart.register(ChartDataLabels);
-
-// GRÁFICOS
-const ctxHora = document.getElementById("graficoHora").getContext('2d');
-new Chart(ctxHora,{
-  type:'line',
-  data:{
-    labels:Array.from({length:24},(_,i)=>i+"h"),
-    datasets:[{data:[15,0,0,0,0,8,0,0,0,0,13,1,0,2,5,0,0,0,0,0,0,0,18,1],
-    borderColor:'#ff6a00', borderWidth:3, pointRadius:0, fill:false, tension:0.4}]
-  },
-  options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}}
-});
-
-const ctxPag = document.getElementById("graficoPagamento").getContext('2d');
-new Chart(ctxPag,{
-  type:'pie',
-  data:{labels:['M-Pesa','E-Mola'], datasets:[{data:[15,10], backgroundColor:['#e60023','#ff8c00'], borderWidth:0}]},
-  options:{
-    responsive:true, maintainAspectRatio:false,
-    plugins:{
-      legend:{position:'bottom', labels:{color:'white', font:{size:14}}},
-      datalabels:{
-        color:'white', font:{weight:'bold', size:14},
-        formatter:(value,ctx)=>{const total=ctx.chart.data.datasets[0].data.reduce((a,b)=>a+b,0); return ((value/total)*100).toFixed(0)+'%';}
-      }
-    }
-  },
-  plugins:[ChartDataLabels]
-});
-
-// MENU
-function openMenu(){ document.getElementById("sidebar").classList.add("open"); document.getElementById("menuBtn").style.display="none"; }
-function closeMenu(){ document.getElementById("sidebar").classList.remove("open"); document.getElementById("menuBtn").style.display="block"; }
-
-// FILTRO
-let data = new Date();
-let menuAberto = false;
-
-function abrir(){
-  const menu = document.getElementById("menu");
-  menuAberto = !menuAberto;
-  menu.classList.toggle("ativo", menuAberto);
-}
-
-document.addEventListener("click", function(e){
-  const menu = document.getElementById("menu");
-  const botao = document.querySelector(".botao");
-  if(menuAberto && !menu.contains(e.target) && !botao.contains(e.target)){
-    menu.classList.remove("ativo");
-    menuAberto=false;
-  }
-});
-
-function setFiltro(t){
-  document.getElementById("texto").innerText=t;
-  document.getElementById("menu").classList.remove("ativo");
-  menuAberto=false;
-}
-
-function renderCalendario(){
-  let ano = data.getFullYear(), mes = data.getMonth();
-  let primeiroDia = new Date(ano, mes, 1).getDay(); if(primeiroDia==0){primeiroDia=7} primeiroDia--;
-  let diasMes = new Date(ano, mes+1, 0).getDate();
-  let nomesMes=["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
-  document.getElementById("mes").innerText = nomesMes[mes]+" "+ano;
-
-  let diasHTML="";
-  for(let i=0;i<primeiroDia;i++){ diasHTML+="<div></div>"; }
-  for(let d=1; d<=diasMes; d++){ diasHTML+=`<div class="dia" onclick="selecionarDia(${d})">${d}</div>`; }
-  document.getElementById("dias").innerHTML=diasHTML;
-}
-
-function selecionarDia(d){
-  const dia = d.toString().padStart(2,'0');
-  const mes = (data.getMonth()+1).toString().padStart(2,'0');
-  const ano = data.getFullYear();
-  document.getElementById("texto").innerText = `${dia}/${mes}/${ano}`;
-  document.getElementById("menu").classList.remove("ativo");
-  menuAberto=false;
-}
-
-function mesAnterior(){ data.setMonth(data.getMonth()-1); renderCalendario(); }
-function mesSeguinte(){ data.setMonth(data.getMonth()+1); renderCalendario(); }
-
-renderCalendario();
-</script>
 </body>
 </html>
