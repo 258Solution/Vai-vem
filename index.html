@@ -1,554 +1,399 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-
 <meta charset="UTF-8">
 <title>Dashboard</title>
-
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
 <!-- Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 
 <style>
-
 /* ================= BODY ================= */
-
 body{
-background:#0f0f0f;
-font-family:'Inter', Arial, sans-serif;
-color:white;
-margin:0;
-padding-top:70px;
+    background:#0f0f0f;
+    font-family:'Inter', Arial, sans-serif;
+    color:white;
+    margin:0;
+    padding-top:70px;
 }
 
 /* ================= MENU HAMBURGUER ================= */
-
 .menu-btn{
-position:fixed;
-top:15px;
-left:15px;
-font-size:30px;
-color:white;
-cursor:pointer;
-z-index:1002;
+    position:fixed;
+    top:15px;
+    left:15px;
+    font-size:30px;
+    color:white;
+    cursor:pointer;
+    z-index:1002;
 }
 
 /* ================= SIDEBAR ================= */
-
 .sidebar{
-position:fixed;
-left:-270px;
-top:0;
-width:250px;
-height:100%;
-background:#111;
-transition:0.4s;
-z-index:1001;
-display:flex;
-flex-direction:column;
+    position:fixed;
+    left:-270px;
+    top:0;
+    width:250px;
+    height:100%;
+    background:#111;
+    transition:0.4s;
+    z-index:1001;
+    display:flex;
+    flex-direction:column;
 }
-
-.sidebar.open{
-left:0;
-}
+.sidebar.open{ left:0; }
 
 .sidebar-header{
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:20px;
-border-bottom:3px solid orange;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:20px;
+    border-bottom:3px solid orange;
 }
-
 .logo{
-font-size:23px;
-font-weight:700;
-display:flex;
-align-items:center;
-gap:6px;
+    font-size:23px;
+    font-weight:700;
+    display:flex;
+    align-items:center;
+    gap:6px;
 }
-
 .logo-icon{
-width:36px;
-height:36px;
-border:3px solid orange;
-display:flex;
-align-items:center;
-justify-content:center;
-border-radius:7px;
-font-weight:bold;
+    width:36px;
+    height:36px;
+    border:3px solid orange;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:7px;
+    font-weight:bold;
 }
 
 /* ================= LINKS MENU ================= */
-
 .sidebar a{
-display:flex;
-align-items:center;
-padding:14px 22px;
-color:#ccc;
-text-decoration:none;
-font-size:19px;
+    display:flex;
+    align-items:center;
+    padding:14px 22px;
+    color:#ccc;
+    text-decoration:none;
+    font-size:19px;
 }
-
-.sidebar a i{
-margin-right:10px;
-}
-
-.sidebar a:hover{
-background:#1f1f1f;
-color:white;
-}
+.sidebar a i{ margin-right:10px; }
+.sidebar a:hover{ background:#1f1f1f; color:white; }
 
 /* ================= CARDS ================= */
-
 .card{
-background:#151515;
-width:95%;
-  margin:28px;
-  height:220px;
-max-width:850px;
-padding:18px;
-border-radius:18px;
-margin:20px auto;
-box-shadow:0 4px 10px rgba(0,0,0,0.5);
+    background:#151515;
+    width:95%;
+    max-width:850px;
+    margin:20px auto;
+    height:220px;
+    padding:18px;
+    border-radius:18px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.5);
 }
-  .card .titulo {
-  display: flex;
-  align-items: center; /* alinha ícone e título verticalmente */
-  gap: 8px;            /* espaço entre ícone e título */
-  color: #b0b0b0;      /* cinza visível para título */
-  font-size: 50px;
-  margin-bottom: 6px;
+.card .titulo{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    color: #b0b0b0;
+    font-size:50px;
+    margin-bottom:6px;
 }
-
-.card .titulo i {
-  font-size: 70px;     /* tamanho do ícone */
-  margin-top: 3px;     /* desce levemente só o ícone */
-  color: #b0b0b0;      /* cor do ícone */
+.card .titulo i{
+    font-size:70px;
+    color:#b0b0b0;
+    vertical-align: middle;
 }
-  
-  .valor{
-  font-weight:700;
-  font-size:48px;
-  color:white;
-  text-align:left;
+.valor{
+    font-weight:700;
+    font-size:48px;
+    color:white;
+    text-align:left;
 }
-  
 .sacar{
-display:inline-block;
-margin-top:8px;
-  font:85px;
-color:#16a34a;
-text-decoration:none;
+    display:inline-block;
+    margin-top:8px;
+    font-size:28px;
+    color:#16a34a;
+    text-decoration:none;
 }
 
 /* ================= GRAFICOS ================= */
-
 h2{
-margin-bottom:12px;
-padding-left:8px;
+    margin-bottom:12px;
+    padding-left:8px;
 }
-
 .grafico-container{
-width:95%;
-height:650px;
-margin:40px;
+    width:95%;
+    height:650px;
+    margin:40px auto;
 }
-
-.divider{
-height:1px;
-background:#444;
-margin:20px 0;
-}
+.divider{ height:1px; background:#444; margin:20px 0; }
 
 /* ================= FILTRO DATA ================= */
-
 .filtro{
-position:relative;
-width:95px;
-margin:12px auto;
+    position:relative;
+    width:150px;
+    margin:12px auto;
 }
-
 .botao{
-background:#151515;
-border:1px solid #444;
-padding:12px;
-border-radius:8px;
-cursor:pointer;
-display:flex;
-justify-content:space-between;
-align-items:center;
-color:white;
+    background:#151515;
+    border:1px solid #444;
+    padding:12px;
+    border-radius:8px;
+    cursor:pointer;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    color:white;
 }
-
+.botao i{ margin-left:8px; font-size:19px; color:orange; }
 .menu{
-display:none;
-position:absolute;
-top:45px;
-background:#151515;
-border:1px solid #444;
-border-radius:10px;
-box-shadow:0 5px 20px rgba(0,0,0,0.5);
-width:95%;
-padding:10px;
-color:#b0b0b09;
+    display:none;
+    position:absolute;
+    top:45px;
+    background:#151515;
+    border:1px solid #444;
+    border-radius:10px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.5);
+    width:95%;
+    padding:10px;
+    color:#b0b0b0;
+    z-index:1003;
 }
-
 .opcao{
-padding:10px;
-cursor:pointer;
-border-radius:6px;
+    padding:10px;
+    cursor:pointer;
+    border-radius:6px;
 }
-
-.opcao:hover{
-background:#f2f2f2;
-}
+.opcao:hover{ background:#333; }
 
 .calendario{
-margin-top:15px;
-border-top:1px solid orange;
-padding-top:10px;
+    margin-top:15px;
+    border-top:1px solid orange;
+    padding-top:10px;
 }
-  
-
-  
 .header-cal{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:10px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:10px;
 }
-
+.header-cal i{
+    cursor:pointer;
+    font-size:18px;
+    color:orange;
+    padding:5px;
+    transition:0.2s;
+}
+.header-cal i:hover{ color:#ffb84d; }
 .semana{
-display:grid;
-grid-template-columns:repeat(7,1fr);
-text-align:center;
-font-size:12px;
-color: #b0b0b0;
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    text-align:center;
+    font-size:12px;
+    color: #b0b0b0;
 }
-
 .dias{
-display:grid;
-grid-template-columns:repeat(7,1fr);
-gap:5px;
-text-align:center;
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:5px;
+    text-align:center;
 }
-
 .dia{
-padding:8px;
-border-radius:6px;
-cursor:pointer;
+    padding:8px;
+    border-radius:6px;
+    cursor:pointer;
 }
-
-.dia:hover{
-background:#eee;
-}
-  
-  .botao i{
-  margin-left:8px;
-  font-size:19px;
-  color:orange;
-}
-  
-  .header-cal i {
-  cursor: pointer;
-  font-size: 18px;
-  color: orange;
-  padding: 5px;
-  transition: 0.2s;
-}
-
-.header-cal i:hover {
-  color: #ffb84d;
-}
-  
- 
-
+.dia:hover{ background:#333; }
 </style>
 </head>
 
 <body>
-
 <!-- MENU -->
 <i class="fas fa-bars menu-btn" id="menuBtn" onclick="openMenu()"></i>
 
 <div class="sidebar" id="sidebar">
-
-<div class="sidebar-header">
-<div class="logo">
-<div class="logo-icon">V</div>
-Vendoo
-</div>
-<i class="fas fa-times" onclick="closeMenu()"></i>
-</div>
-
-<a href="#"><i class="fas fa-chart-line"></i>Dashboard</a>
-<a href="#"><i class="fas fa-box"></i>Produtos</a>
-<a href="#"><i class="fas fa-chart-pie"></i>Relatórios</a>
-<a href="#"><i class="fas fa-wallet"></i>Financeiro</a>
-<a href="#"><i class="fas fa-users"></i>Afiliados</a>
-
+    <div class="sidebar-header">
+        <div class="logo">
+            <div class="logo-icon">V</div> Vendoo
+        </div>
+        <i class="fas fa-times" onclick="closeMenu()"></i>
+    </div>
+    <a href="#"><i class="fas fa-chart-line"></i>Dashboard</a>
+    <a href="#"><i class="fas fa-box"></i>Produtos</a>
+    <a href="#"><i class="fas fa-chart-pie"></i>Relatórios</a>
+    <a href="#"><i class="fas fa-wallet"></i>Financeiro</a>
+    <a href="#"><i class="fas fa-users"></i>Afiliados</a>
 </div>
 
 <!-- FILTRO DATA -->
-
 <div class="filtro">
+    <div class="botao" onclick="abrir()">
+        <span id="texto">Hoje</span>
+        <i class="fas fa-chevron-down"></i>
+    </div>
+    <div class="menu" id="menu">
+        <div class="opcao" onclick="setFiltro('Hoje')">Hoje</div>
+        <div class="opcao" onclick="setFiltro('Últimos 7 dias')">Últimos 7 dias</div>
+        <div class="opcao" onclick="setFiltro('Últimos 30 dias')">Últimos 30 dias</div>
+        <div class="opcao" onclick="setFiltro('Tempo todo')">Tempo todo</div>
 
-<div class="botao" onclick="abrir()">
-<span id="texto">Hoje</span>
-<i class="fas fa-chevron-down"></i>
-</div>
-
-<div class="menu" id="menu">
-
-<div class="opcao" onclick="setFiltro('Hoje')">Hoje</div>
-<div class="opcao" onclick="setFiltro('Últimos 7 dias')">Últimos 7 dias</div>
-<div class="opcao" onclick="setFiltro('Últimos 30 dias')">Últimos 30 dias</div>
-<div class="opcao" onclick="setFiltro('Tempo todo')">Tempo todo</div>
-
-<div class="calendario">
-
-<div class="header-cal">
-  <i class="fas fa-chevron-left" onclick="mesAnterior()"></i>
-  <span id="mes"></span>
-  <i class="fas fa-chevron-right" onclick="mesSeguinte()"></i>
-</div>
-
-<div class="semana">
-<div>Seg</div>
-<div>Ter</div>
-<div>Qua</div>
-<div>Qui</div>
-<div>Sex</div>
-<div>Sáb</div>
-<div>Dom</div>
-</div>
-
-<div class="dias" id="dias"></div>
-
-</div>
-</div>
+        <div class="calendario">
+            <div class="header-cal">
+                <i class="fas fa-chevron-left" onclick="mesAnterior()"></i>
+                <span id="mes"></span>
+                <i class="fas fa-chevron-right" onclick="mesSeguinte()"></i>
+            </div>
+            <div class="semana">
+                <div>Seg</div><div>Ter</div><div>Qua</div><div>Qui</div><div>Sex</div><div>Sáb</div><div>Dom</div>
+            </div>
+            <div class="dias" id="dias"></div>
+        </div>
+    </div>
 </div>
 
 <!-- CARDS -->
-
 <div class="card">
-  <div class="titulo">
-    <i class="fas fa-wallet"></i>
-    <span>Saldo disponível</span>
-  </div>
-  <div class="valor">Mt$ 100,000.00</div>
-  <a class="sacar" href="#">Sacar →</a>
+    <div class="titulo"><i class="fas fa-wallet"></i><span>Saldo disponível</span></div>
+    <div class="valor">Mt$ 100,000.00</div>
+    <a class="sacar" href="#">Sacar →</a>
 </div>
 
 <div class="card">
-  <div class="titulo">
-      <i class="fas fa-cart-shopping"></i>
-    <span>vendas realizadas</span>
-  </div>
-  <div class="valor">45</div>
-</div>
-
-  <div class="card">
-  <div class="titulo">
-    <i class="fas fa-chart-line"></i>
-    <span>Taxa de conversão</span>
-  </div>
-  <div class="valor">5,5%</div>
+    <div class="titulo"><i class="fas fa-cart-shopping"></i><span>Vendas realizadas</span></div>
+    <div class="valor">45</div>
 </div>
 
 <div class="card">
-  <div class="titulo">
-    <i class="fas fa-money-bill-wave"></i>
-    <span>Ticket médio</span>
-  </div>
-  <div class="valor">150,00</div>
+    <div class="titulo"><i class="fas fa-chart-line"></i><span>Taxa de conversão</span></div>
+    <div class="valor">5,5%</div>
 </div>
 
 <div class="card">
-
-<h2>Vendas por Hora</h2>
-<div class="grafico-container">
-<canvas id="graficoHora"></canvas>
+    <div class="titulo"><i class="fas fa-money-bill-wave"></i><span>Ticket médio</span></div>
+    <div class="valor">150,00</div>
 </div>
 
-<div class="divider"></div>
-
-<h2>Vendas por Pagamento</h2>
-<div class="grafico-container">
-<canvas id="graficoPagamento"></canvas>
-</div>
-
+<div class="card">
+    <h2>Vendas por Hora</h2>
+    <div class="grafico-container"><canvas id="graficoHora"></canvas></div>
+    <div class="divider"></div>
+    <h2>Vendas por Pagamento</h2>
+    <div class="grafico-container"><canvas id="graficoPagamento"></canvas></div>
 </div>
 
 <script>
+/* ================= MENU ================= */
+function openMenu(){
+    document.getElementById("sidebar").classList.add("open");
+    document.getElementById("menuBtn").style.display="none";
+}
+function closeMenu(){
+    document.getElementById("sidebar").classList.remove("open");
+    document.getElementById("menuBtn").style.display="block";
+}
+
+/* ================= FILTRO ================= */
+let data = new Date();
+function abrir(){
+    let menu=document.getElementById("menu");
+    menu.style.display = menu.style.display=="block"?"none":"block";
+}
+function setFiltro(t){
+    document.getElementById("texto").innerText=t;
+    document.getElementById("menu").style.display="none";
+}
+
+/* ================= CALENDARIO ================= */
+function renderCalendario(){
+    let ano = data.getFullYear();
+    let mes = data.getMonth();
+
+    let primeiroDia = new Date(ano, mes, 1).getDay(); // 0=Dom, 6=Sab
+    primeiroDia = (primeiroDia + 6) % 7; // Ajusta Segunda=0
+
+    let diasMes = new Date(ano, mes+1, 0).getDate();
+    let nomesMes=["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
+    document.getElementById("mes").innerText = nomesMes[mes]+" "+ano;
+
+    let diasHTML="";
+    for(let i=0;i<primeiroDia;i++){ diasHTML+="<div></div>"; }
+    for(let d=1;d<=diasMes;d++){
+        diasHTML+=`<div class="dia" onclick="selecionarDia(${d})">${d}</div>`;
+    }
+    document.getElementById("dias").innerHTML=diasHTML;
+}
+function selecionarDia(d){
+    const dia = d.toString().padStart(2,'0');
+    const mes = (data.getMonth()+1).toString().padStart(2,'0');
+    const ano = data.getFullYear();
+    document.getElementById("texto").innerText = `${dia}/${mes}/${ano}`;
+    document.getElementById("menu").style.display="none";
+}
+function mesAnterior(){ data.setMonth(data.getMonth()-1); renderCalendario(); }
+function mesSeguinte(){ data.setMonth(data.getMonth()+1); renderCalendario(); }
+renderCalendario();
+
+/* ================= GRAFICOS ================= */
 Chart.register(ChartDataLabels);
 
 // Vendas por hora (linha)
 const ctxHora = document.getElementById("graficoHora").getContext('2d');
 new Chart(ctxHora, {
-  type:'line',
-  data:{
-    labels:Array.from({length:24},(_,i)=>i+"h"),
-    datasets:[{
-      data:[15,0,0,0,0,8,0,0,0,0,13,1,0,2,5,0,0,0,0,0,0,0,18,1],
-      borderColor:'#ff6a00',
-      borderWidth:3,
-      pointRadius:0,
-      fill:false,
-      tension:0.4
-    }]
-  },
-  options:{
-    responsive:true,
-    maintainAspectRatio:false,
-    interaction:{mode:'index', intersect:false},
-    plugins:{legend:{display:false}}
-  }
+    type:'line',
+    data:{
+        labels:Array.from({length:24},(_,i)=>i+"h"),
+        datasets:[{
+            data:[15,0,0,0,0,8,0,0,0,0,13,1,0,2,5,0,0,0,0,0,0,0,18,1],
+            borderColor:'#ff6a00',
+            borderWidth:3,
+            pointRadius:0,
+            fill:false,
+            tension:0.4
+        }]
+    },
+    options:{
+        responsive:true,
+        maintainAspectRatio:false,
+        interaction:{mode:'index', intersect:false},
+        plugins:{legend:{display:false}}
+    }
 });
 
 // Vendas por pagamento (pizza)
 const ctxPag = document.getElementById("graficoPagamento").getContext('2d');
-new Chart(ctxPag, {
-  type:'pie',
-  data:{
-    labels:['M-Pesa','E-Mola'],
-    datasets:[{
-      data:[15,10],
-      backgroundColor:['#e60023','#ff8c00'],
-      borderWidth:0
-    }]
-  },
-  options:{
-    responsive:true,
-    maintainAspectRatio:false,
-    plugins:{
-      legend:{position:'bottom', labels:{color:'white', font:{size:14}}},
-      datalabels:{
-        color:'white',
-        font:{weight:'bold', size:14},
-        formatter:(value,context)=>{
-          const total = context.chart.data.datasets[0].data.reduce((a,b)=>a+b,0);
-          return ((value/total)*100).toFixed(0)+'%';
+new Chart(ctxPag,{
+    type:'pie',
+    data:{
+        labels:['M-Pesa','E-Mola'],
+        datasets:[{
+            data:[15,10],
+            backgroundColor:['#e60023','#ff8c00'],
+            borderWidth:0
+        }]
+    },
+    options:{
+        responsive:true,
+        maintainAspectRatio:false,
+        plugins:{
+            legend:{position:'bottom', labels:{color:'white', font:{size:14}}},
+            datalabels:{
+                color:'white',
+                font:{weight:'bold', size:14},
+                formatter:(value,context)=>{
+                    const total = context.chart.data.datasets[0].data.reduce((a,b)=>a+b,0);
+                    return ((value/total)*100).toFixed(0)+'%';
+                }
+            }
         }
-      }
-    }
-  },
-  plugins:[ChartDataLabels]
+    },
+    plugins:[ChartDataLabels]
 });
-  
-  
-  
-/* MENU */
-
-function openMenu(){
-document.getElementById("sidebar").classList.add("open")
-document.getElementById("menuBtn").style.display="none"
-}
-
-function closeMenu(){
-document.getElementById("sidebar").classList.remove("open")
-document.getElementById("menuBtn").style.display="block"
-}
-
-/* FILTRO */
-
-let data = new Date()
-
-function abrir(){
-let menu=document.getElementById("menu")
-menu.style.display=menu.style.display=="block"?"none":"block"
-}
-
-function setFiltro(t){
-document.getElementById("texto").innerText=t
-document.getElementById("menu").style.display="none"
-}
-
-function renderCalendario(){
-
-let ano=data.getFullYear()
-let mes=data.getMonth()
-
-let primeiroDia=new Date(ano,mes,1).getDay()
-if(primeiroDia==0){primeiroDia=7}
-primeiroDia--
-
-let diasMes=new Date(ano,mes+1,0).getDate()
-
-let nomesMes=["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"]
-
-document.getElementById("mes").innerText=nomesMes[mes]+" "+ano
-
-let diasHTML=""
-
-for(let i=0;i<primeiroDia;i++){diasHTML+="<div></div>"}
-
-for(let d=1;d<=diasMes;d++){
-diasHTML+=`<div class="dia" onclick="selecionarDia(${d})">${d}</div>`
-}
-
-document.getElementById("dias").innerHTML=diasHTML
-}
-
-function selecionarDia(d){
-  const dia = d.toString().padStart(2, '0'); // garante 2 dígitos
-  const mes = (data.getMonth() + 1).toString().padStart(2, '0'); // mês 1-12
-  const ano = data.getFullYear();
-  
-  document.getElementById("texto").innerText = `${dia}/${mes}/${ano}`;
-  document.getElementById("menu").style.display = "none";
-}
-
-function mesAnterior(){
-data.setMonth(data.getMonth()-1)
-renderCalendario()
-}
-
-function mesSeguinte(){
-data.setMonth(data.getMonth()+1)
-renderCalendario()
-}
-
-renderCalendario()
-
-/* GRAFICOS */
-
-Chart.register(ChartDataLabels)
-
-new Chart(document.getElementById("graficoHora"),{
-type:'line',
-data:{
-labels:Array.from({length:24},(_,i)=>i+"h"),
-datasets:[{
-data:[15,0,0,0,0,8,0,0,0,0,13,1,0,2,5,0,0,0,0,0,0,0,18,1],
-borderColor:'#ff6a00',
-borderWidth:3,
-pointRadius:0,
-fill:false,
-tension:0.4
-}]
-},
-options:{plugins:{legend:{display:false}}}
-})
-
-new Chart(document.getElementById("graficoPagamento"),{
-type:'pie',
-data:{
-labels:['M-Pesa','E-Mola'],
-datasets:[{
-data:[15,10],
-backgroundColor:['#e60023','#ff8c00']
-}]
-}
-})
-
 </script>
 
 </body>
