@@ -1,1 +1,1688 @@
+/* =====================================================
+   RESET
+===================================================== */
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #080807;
+    color: #f5f2ea;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
+    padding-bottom: 92px;
+}
+
+img {
+    display: block;
+    width: 100%;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+/* =====================================================
+   VARIÁVEIS
+===================================================== */
+
+:root {
+    --black: #080807;
+    --black-2: #0d0d0b;
+    --card: #121210;
+    --card-2: #161613;
+
+    --white: #f7f5ef;
+    --gray: #a8a49c;
+    --gray-2: #77736c;
+
+    --gold: #f0b82d;
+    --gold-light: #ffc94a;
+    --gold-dark: #9d6e12;
+
+    --green: #08b95b;
+    --green-dark: #078a46;
+
+    --border: rgba(255, 255, 255, 0.10);
+}
+
+
+/* =====================================================
+   CONTAINER
+===================================================== */
+
+.container {
+    width: min(1120px, calc(100% - 48px));
+    margin: 0 auto;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+
+    background: rgba(8, 8, 7, 0.94);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    transition: 0.3s;
+}
+
+.header-content {
+    min-height: 70px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.nav a {
+    color: #aaa69d;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    transition: 0.2s;
+}
+
+.nav a:hover {
+    color: var(--gold);
+}
+
+.header-cta {
+    background: var(--green);
+    color: white;
+
+    padding: 13px 20px;
+    border-radius: 7px;
+
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 1px;
+
+    transition: 0.25s;
+}
+
+.header-cta:hover {
+    background: #0bd467;
+    transform: translateY(-2px);
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero {
+    min-height: 850px;
+    padding: 150px 0 110px;
+
+    position: relative;
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 65% 25%,
+            rgba(196, 139, 20, 0.13),
+            transparent 32%
+        ),
+        #080807;
+}
+
+.hero::before {
+    content: "";
+
+    position: absolute;
+
+    width: 600px;
+    height: 600px;
+
+    right: -280px;
+    top: 120px;
+
+    background: rgba(232, 169, 38, 0.06);
+    filter: blur(100px);
+    border-radius: 50%;
+
+    pointer-events: none;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-text {
+    max-width: 850px;
+}
+
+.eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+
+    color: var(--gold);
+
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: 5px;
+
+    margin-bottom: 48px;
+}
+
+.eyebrow span {
+    display: block;
+
+    width: 44px;
+    height: 1px;
+
+    background: var(--gold);
+}
+
+.hero h1 {
+    font-size: clamp(48px, 7vw, 92px);
+    line-height: 0.98;
+
+    letter-spacing: -3px;
+
+    font-weight: 950;
+
+    max-width: 900px;
+}
+
+.hero h1 strong {
+    color: var(--gold);
+}
+
+.hero h2 {
+    margin-top: 46px;
+
+    font-size: clamp(22px, 3vw, 34px);
+    line-height: 1.25;
+
+    font-weight: 700;
+
+    max-width: 700px;
+}
+
+.hero h2 strong {
+    color: var(--gold);
+}
+
+.hero-description {
+    margin-top: 25px;
+
+    max-width: 690px;
+
+    color: #9f9b93;
+
+    font-size: 20px;
+    line-height: 1.65;
+}
+
+.main-cta {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 64px;
+
+    padding: 0 38px;
+
+    margin-top: 38px;
+
+    background: var(--green);
+    color: white;
+
+    border-radius: 10px;
+
+    font-size: 16px;
+    font-weight: 900;
+
+    letter-spacing: 1.5px;
+
+    box-shadow:
+        0 12px 35px rgba(8, 185, 91, 0.18);
+
+    transition: 0.25s;
+}
+
+.main-cta:hover {
+    background: #0bd467;
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 16px 45px rgba(8, 185, 91, 0.25);
+}
+
+.secure-info {
+    margin-top: 24px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 7px;
+
+    color: #99958c;
+
+    font-size: 15px;
+}
+
+.secure-title {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    color: var(--white);
+
+    font-weight: 700;
+}
+
+.secure-title svg {
+    width: 23px;
+    height: 23px;
+
+    color: var(--green);
+}
+
+
+/* =====================================================
+   SECTION HEADING
+===================================================== */
+
+.section-heading {
+    text-align: center;
+
+    max-width: 750px;
+
+    margin: 0 auto 65px;
+}
+
+.section-heading > span {
+    display: inline-block;
+
+    color: var(--gold);
+
+    font-size: 13px;
+    font-weight: 900;
+
+    letter-spacing: 5px;
+
+    margin-bottom: 22px;
+}
+
+.section-heading h2 {
+    font-size: clamp(42px, 6vw, 72px);
+
+    line-height: 1;
+
+    letter-spacing: -2px;
+
+    font-weight: 950;
+}
+
+.section-heading h2 strong {
+    display: block;
+
+    color: var(--gold);
+}
+
+.section-heading p {
+    margin-top: 30px;
+
+    color: #96928a;
+
+    font-size: 20px;
+
+    line-height: 1.5;
+}
+
+
+/* =====================================================
+   CURSOS
+===================================================== */
+
+.courses {
+    padding: 110px 0 130px;
+
+    background: #080807;
+}
+
+.courses-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 22px;
+}
+
+.course-card {
+    position: relative;
+
+    background: #11110f;
+
+    border: 1px solid rgba(255, 255, 255, 0.10);
+
+    border-radius: 28px;
+
+    overflow: hidden;
+
+    opacity: 0;
+
+    transform: translateY(30px);
+
+    transition:
+        opacity 0.5s ease,
+        transform 0.5s ease,
+        border-color 0.25s ease;
+}
+
+.course-card.show {
+    opacity: 1;
+
+    transform: translateY(0);
+}
+
+.course-card:hover {
+    border-color: rgba(240, 184, 45, 0.45);
+
+    transform: translateY(-5px);
+}
+
+.course-image {
+    position: relative;
+
+    overflow: hidden;
+
+    aspect-ratio: 0.76;
+
+    background: #111;
+}
+
+.course-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.course-number {
+    position: absolute;
+
+    z-index: 2;
+
+    top: 15px;
+    left: 15px;
+
+    min-width: 43px;
+    height: 32px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 10px;
+
+    border-radius: 20px;
+
+    background: #0c0c0b;
+
+    color: var(--gold);
+
+    font-size: 13px;
+    font-weight: 950;
+
+    border: 1px solid rgba(240, 184, 45, 0.25);
+}
+
+.course-info {
+    padding: 19px 20px 22px;
+}
+
+.course-info h3 {
+    color: var(--white);
+
+    font-size: 17px;
+
+    line-height: 1.2;
+
+    font-weight: 950;
+
+    letter-spacing: 0.5px;
+}
+
+
+/* =====================================================
+   BENEFÍCIOS
+===================================================== */
+
+.benefits {
+    padding: 100px 0 130px;
+
+    background: #080807;
+}
+
+.benefits-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 24px;
+}
+
+.benefit-card {
+    min-height: 250px;
+
+    padding: 38px;
+
+    background: #11110f;
+
+    border: 1px solid rgba(255, 255, 255, 0.10);
+
+    border-radius: 27px;
+
+    transition: 0.25s;
+}
+
+.benefit-card:hover {
+    border-color: rgba(240, 184, 45, 0.35);
+
+    transform: translateY(-3px);
+}
+
+.benefit-icon {
+    width: 45px;
+    height: 45px;
+
+    margin-bottom: 27px;
+
+    color: var(--gold);
+}
+
+.benefit-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.benefit-card h3 {
+    font-size: 24px;
+
+    line-height: 1.15;
+
+    font-weight: 950;
+}
+
+.benefit-card p {
+    margin-top: 22px;
+
+    max-width: 330px;
+
+    color: #99958d;
+
+    font-size: 18px;
+
+    line-height: 1.5;
+}
+
+
+/* =====================================================
+   IMPACTO
+===================================================== */
+
+.impact {
+    padding: 150px 0 170px;
+
+    background: #080807;
+}
+
+.impact-content {
+    text-align: center;
+}
+
+.impact-content > span {
+    display: block;
+
+    color: #aaa59b;
+
+    font-size: 18px;
+
+    line-height: 1.7;
+
+    font-weight: 700;
+
+    letter-spacing: 6px;
+}
+
+.impact h2 {
+    margin-top: 50px;
+
+    font-size: clamp(44px, 7vw, 80px);
+
+    line-height: 1.05;
+
+    letter-spacing: -2px;
+
+    font-weight: 950;
+}
+
+.impact h2 strong {
+    color: var(--gold);
+}
+
+.impact-line {
+    width: 270px;
+    height: 1px;
+
+    margin: 70px auto 0;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        var(--gold),
+        transparent
+    );
+}
+
+
+/* =====================================================
+   BONUS
+===================================================== */
+
+.bonus {
+    padding: 120px 0;
+
+    background: #0b0b09;
+}
+
+.bonus-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 22px;
+}
+
+.bonus-card {
+    padding: 35px;
+
+    background: #121210;
+
+    border: 1px solid rgba(255, 255, 255, 0.09);
+
+    border-radius: 22px;
+
+    opacity: 0;
+
+    transform: translateY(30px);
+
+    transition:
+        opacity 0.5s ease,
+        transform 0.5s ease,
+        border-color 0.25s ease;
+}
+
+.bonus-card.show {
+    opacity: 1;
+
+    transform: translateY(0);
+}
+
+.bonus-card:hover {
+    border-color: rgba(240, 184, 45, 0.35);
+}
+
+.bonus-icon {
+    width: 43px;
+    height: 43px;
+
+    margin-bottom: 25px;
+
+    color: var(--gold);
+}
+
+.bonus-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.bonus-card h3 {
+    font-size: 20px;
+
+    font-weight: 950;
+}
+
+.bonus-card p {
+    margin-top: 15px;
+
+    color: #99958c;
+
+    font-size: 16px;
+
+    line-height: 1.55;
+}
+
+
+/* =====================================================
+   PROVAS
+===================================================== */
+
+.testimonials {
+    padding: 120px 0;
+
+    background: #080807;
+}
+
+.proof-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 18px;
+}
+
+.proof-card {
+    overflow: hidden;
+
+    background: #11110f;
+
+    border: 1px solid rgba(255, 255, 255, 0.10);
+
+    border-radius: 18px;
+}
+
+.proof-card img {
+    width: 100%;
+    height: auto;
+}
+
+
+/* =====================================================
+   FAQ
+===================================================== */
+
+.faq {
+    padding: 120px 0 140px;
+
+    background: #0b0b09;
+}
+
+.faq-list {
+    max-width: 850px;
+
+    margin: 0 auto;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 13px;
+}
+
+.faq-item {
+    background: #121210;
+
+    border: 1px solid rgba(255, 255, 255, 0.09);
+
+    border-radius: 14px;
+
+    overflow: hidden;
+}
+
+.faq-item[open] {
+    border-color: rgba(240, 184, 45, 0.35);
+}
+
+.faq-item summary {
+    position: relative;
+
+    padding: 24px 55px 24px 24px;
+
+    cursor: pointer;
+
+    list-style: none;
+
+    font-size: 17px;
+
+    line-height: 1.4;
+
+    font-weight: 800;
+
+    color: var(--white);
+}
+
+.faq-item summary::-webkit-details-marker {
+    display: none;
+}
+
+.faq-item summary::after {
+    content: "+";
+
+    position: absolute;
+
+    right: 22px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: var(--gold);
+
+    font-size: 27px;
+
+    font-weight: 400;
+}
+
+.faq-item[open] summary::after {
+    content: "−";
+}
+
+.faq-item p {
+    padding: 0 24px 25px;
+
+    color: #9b978f;
+
+    font-size: 16px;
+
+    line-height: 1.65;
+}
+
+.payment-info {
+    display: flex;
+
+    gap: 14px;
+
+    margin: 0 24px 25px;
+}
+
+.payment-info div {
+    flex: 1;
+
+    padding: 16px;
+
+    background: #0b0b09;
+
+    border: 1px solid rgba(240, 184, 45, 0.20);
+
+    border-radius: 10px;
+}
+
+.payment-info span {
+    display: block;
+
+    color: var(--gold);
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    letter-spacing: 1px;
+}
+
+.payment-info strong {
+    display: block;
+
+    margin-top: 6px;
+
+    font-size: 15px;
+}
+
+
+/* =====================================================
+   CTA FINAL — CARD PREMIUM
+===================================================== */
+
+.final-cta {
+    padding: 110px 0 140px;
+
+    background: #080807;
+}
+
+.final-cta-content {
+    max-width: 760px;
+
+    margin: 0 auto;
+
+    padding: 65px 45px;
+
+    text-align: center;
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(240, 184, 45, 0.09),
+            transparent 55%
+        ),
+        #121210;
+
+    border: 1px solid rgba(240, 184, 45, 0.28);
+
+    border-radius: 28px;
+
+    box-shadow:
+        0 20px 70px rgba(0, 0, 0, 0.35);
+}
+
+.final-cta-content > span {
+    color: var(--gold);
+
+    font-size: 12px;
+
+    font-weight: 900;
+
+    letter-spacing: 5px;
+}
+
+.final-cta h2 {
+    margin-top: 25px;
+
+    font-size: clamp(42px, 7vw, 72px);
+
+    line-height: 1.03;
+
+    font-weight: 950;
+}
+
+.final-cta h2 strong {
+    display: block;
+
+    color: var(--gold);
+}
+
+.final-cta-content > p {
+    margin-top: 24px;
+
+    color: #9d9991;
+
+    font-size: 18px;
+
+    line-height: 1.55;
+}
+
+.final-price {
+    margin-top: 32px;
+}
+
+.final-price small {
+    display: block;
+
+    color: #77736c;
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    letter-spacing: 3px;
+}
+
+.final-price strong {
+    display: block;
+
+    margin-top: 6px;
+
+    color: var(--gold);
+
+    font-size: 60px;
+
+    line-height: 1;
+
+    font-weight: 950;
+}
+
+.final-cta .main-cta {
+    min-width: 340px;
+}
+
+.final-note {
+    margin-top: 17px !important;
+
+    color: #716e67 !important;
+
+    font-size: 13px !important;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.footer {
+    padding: 40px 0;
+
+    text-align: center;
+
+    background: #060605;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.footer p {
+    color: #66635d;
+
+    font-size: 12px;
+}
+
+
+/* =====================================================
+   WHATSAPP
+===================================================== */
+
+.whatsapp {
+    position: fixed;
+
+    right: 22px;
+    bottom: 105px;
+
+    z-index: 900;
+
+    width: 55px;
+    height: 55px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #12c968;
+
+    color: white;
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.4);
+
+    transition: 0.25s;
+}
+
+.whatsapp:hover {
+    transform: scale(1.08);
+}
+
+.whatsapp svg {
+    width: 27px;
+    height: 27px;
+}
+
+
+/* =====================================================
+   BARRA FIXA DE COMPRA
+===================================================== */
+
+.sticky-buy {
+    position: fixed;
+
+    left: 0;
+    bottom: 0;
+
+    z-index: 1100;
+
+    width: 100%;
+
+    min-height: 82px;
+
+    padding: 12px 28px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 45px;
+
+    background: rgba(12, 12, 10, 0.96);
+
+    border-top: 1px solid rgba(240, 184, 45, 0.18);
+
+    box-shadow:
+        0 -10px 35px rgba(0, 0, 0, 0.30);
+
+    backdrop-filter: blur(15px);
+
+    -webkit-backdrop-filter: blur(15px);
+}
+
+.sticky-price {
+    display: flex;
+
+    flex-direction: column;
+}
+
+.sticky-price strong {
+    color: var(--gold);
+
+    font-size: 27px;
+
+    line-height: 1;
+
+    font-weight: 950;
+}
+
+.sticky-price span {
+    margin-top: 5px;
+
+    color: #99958d;
+
+    font-size: 12px;
+}
+
+.sticky-buy > a {
+    min-height: 54px;
+
+    padding: 0 42px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: var(--green);
+
+    color: white;
+
+    border-radius: 30px;
+
+    font-size: 14px;
+
+    font-weight: 900;
+
+    letter-spacing: 1px;
+
+    transition: 0.25s;
+}
+
+.sticky-buy > a:hover {
+    background: #0bd467;
+
+    transform: translateY(-2px);
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 900px) {
+
+    .container {
+        width: min(100% - 36px, 700px);
+    }
+
+    .header-content {
+        min-height: 62px;
+    }
+
+    .nav {
+        gap: 15px;
+    }
+
+    .nav a {
+        font-size: 11px;
+    }
+
+    .header-cta {
+        padding: 11px 14px;
+
+        font-size: 10px;
+    }
+
+    .hero {
+        padding-top: 125px;
+    }
+
+    .courses-grid {
+        gap: 14px;
+    }
+
+    .course-info {
+        padding: 15px;
+    }
+
+    .course-info h3 {
+        font-size: 14px;
+    }
+
+    .proof-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+    body {
+        padding-bottom: 86px;
+    }
+
+    .container {
+        width: calc(100% - 32px);
+    }
+
+
+    /* HEADER */
+
+    .header {
+        display: none;
+    }
+
+
+    /* HERO */
+
+    .hero {
+        min-height: auto;
+
+        padding: 95px 0 85px;
+
+        background:
+            radial-gradient(
+                circle at 50% 20%,
+                rgba(197, 141, 20, 0.12),
+                transparent 40%
+            ),
+            #080807;
+    }
+
+    .eyebrow {
+        justify-content: center;
+
+        gap: 12px;
+
+        margin-bottom: 32px;
+
+        font-size: 10px;
+
+        letter-spacing: 3px;
+
+        text-align: center;
+    }
+
+    .eyebrow span {
+        width: 30px;
+    }
+
+    .hero-text {
+        text-align: left;
+    }
+
+    .hero h1 {
+        font-size: clamp(43px, 12vw, 60px);
+
+        line-height: 1.01;
+
+        letter-spacing: -2px;
+    }
+
+    .hero h2 {
+        margin-top: 35px;
+
+        font-size: 22px;
+
+        line-height: 1.35;
+    }
+
+    .hero-description {
+        margin-top: 20px;
+
+        font-size: 17px;
+
+        line-height: 1.6;
+    }
+
+    .main-cta {
+        width: 100%;
+
+        min-height: 61px;
+
+        padding: 0 15px;
+
+        font-size: 14px;
+    }
+
+    .secure-info {
+        font-size: 14px;
+    }
+
+
+    /* SECTION HEADINGS */
+
+    .section-heading {
+        margin-bottom: 40px;
+    }
+
+    .section-heading > span {
+        font-size: 10px;
+
+        letter-spacing: 3px;
+
+        margin-bottom: 18px;
+    }
+
+    .section-heading h2 {
+        font-size: 42px;
+
+        letter-spacing: -1.5px;
+    }
+
+    .section-heading p {
+        margin-top: 20px;
+
+        font-size: 17px;
+    }
+
+
+    /* CURSOS */
+
+    .courses {
+        padding: 80px 0 100px;
+    }
+
+    .courses-grid {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+
+        gap: 10px;
+    }
+
+    .course-card {
+        border-radius: 18px;
+    }
+
+    .course-number {
+        top: 8px;
+        left: 8px;
+
+        min-width: 31px;
+        height: 24px;
+
+        padding: 0 7px;
+
+        font-size: 9px;
+    }
+
+    .course-info {
+        padding: 11px 9px 13px;
+    }
+
+    .course-info h3 {
+        font-size: 10px;
+
+        line-height: 1.2;
+    }
+
+    .course-card:nth-child(7) {
+        grid-column: 2;
+    }
+
+
+    /* BENEFÍCIOS */
+
+    .benefits {
+        padding: 80px 0 100px;
+    }
+
+    .benefits-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 12px;
+    }
+
+    .benefit-card {
+        min-height: 235px;
+
+        padding: 23px 18px;
+
+        border-radius: 22px;
+    }
+
+    .benefit-icon {
+        width: 35px;
+        height: 35px;
+
+        margin-bottom: 24px;
+    }
+
+    .benefit-card h3 {
+        font-size: 18px;
+
+        line-height: 1.2;
+    }
+
+    .benefit-card p {
+        margin-top: 16px;
+
+        font-size: 15px;
+
+        line-height: 1.5;
+    }
+
+
+    /* IMPACTO */
+
+    .impact {
+        padding: 110px 0 120px;
+    }
+
+    .impact-content > span {
+        font-size: 12px;
+
+        line-height: 1.8;
+
+        letter-spacing: 4px;
+    }
+
+    .impact h2 {
+        margin-top: 35px;
+
+        font-size: 43px;
+
+        line-height: 1.08;
+    }
+
+    .impact-line {
+        margin-top: 55px;
+
+        width: 190px;
+    }
+
+
+    /* BONUS */
+
+    .bonus {
+        padding: 90px 0 100px;
+    }
+
+    .bonus-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 12px;
+    }
+
+    .bonus-card {
+        padding: 23px 18px;
+
+        border-radius: 19px;
+    }
+
+    .bonus-icon {
+        width: 34px;
+        height: 34px;
+
+        margin-bottom: 20px;
+    }
+
+    .bonus-card h3 {
+        font-size: 15px;
+
+        line-height: 1.25;
+    }
+
+    .bonus-card p {
+        margin-top: 12px;
+
+        font-size: 13px;
+    }
+
+
+    /* PROVAS */
+
+    .testimonials {
+        padding: 90px 0 100px;
+    }
+
+    .proof-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 10px;
+    }
+
+    .proof-card {
+        border-radius: 14px;
+    }
+
+
+    /* FAQ */
+
+    .faq {
+        padding: 90px 0 110px;
+    }
+
+    .faq-list {
+        gap: 10px;
+    }
+
+    .faq-item summary {
+        padding: 20px 45px 20px 18px;
+
+        font-size: 15px;
+    }
+
+    .faq-item summary::after {
+        right: 17px;
+
+        font-size: 23px;
+    }
+
+    .faq-item p {
+        padding: 0 18px 20px;
+
+        font-size: 14px;
+
+        line-height: 1.6;
+    }
+
+    .payment-info {
+        margin: 0 18px 20px;
+
+        flex-direction: column;
+
+        gap: 8px;
+    }
+
+    .payment-info div {
+        padding: 13px;
+    }
+
+
+    /* CTA FINAL — MOBILE */
+
+    .final-cta {
+        padding: 80px 0 110px;
+    }
+
+    .final-cta-content {
+        padding: 45px 20px;
+
+        border-radius: 22px;
+    }
+
+    .final-cta-content > span {
+        font-size: 9px;
+
+        letter-spacing: 3px;
+    }
+
+    .final-cta h2 {
+        font-size: 40px;
+    }
+
+    .final-cta-content > p {
+        font-size: 15px;
+    }
+
+    .final-price strong {
+        font-size: 52px;
+    }
+
+    .final-cta .main-cta {
+        width: 100%;
+
+        min-width: 0;
+    }
+
+
+    /* FOOTER */
+
+    .footer {
+        padding: 30px 0;
+    }
+
+
+    /* WHATSAPP */
+
+    .whatsapp {
+        width: 50px;
+        height: 50px;
+
+        right: 15px;
+        bottom: 96px;
+    }
+
+    .whatsapp svg {
+        width: 24px;
+        height: 24px;
+    }
+
+
+    /* BARRA FIXA */
+
+    .sticky-buy {
+        min-height: 76px;
+
+        padding: 9px 12px;
+
+        gap: 12px;
+    }
+
+    .sticky-price {
+        min-width: 83px;
+    }
+
+    .sticky-price strong {
+        font-size: 22px;
+    }
+
+    .sticky-price span {
+        font-size: 10px;
+    }
+
+    .sticky-buy > a {
+        flex: 1;
+
+        min-height: 52px;
+
+        padding: 0 10px;
+
+        border-radius: 28px;
+
+        font-size: 11px;
+
+        letter-spacing: 0.5px;
+
+        text-align: center;
+    }
+}
+
+
+/* =====================================================
+   MOBILE PEQUENO
+===================================================== */
+
+@media (max-width: 380px) {
+
+    .container {
+        width: calc(100% - 24px);
+    }
+
+    .hero h1 {
+        font-size: 40px;
+    }
+
+    .courses-grid {
+        gap: 7px;
+    }
+
+    .course-card {
+        border-radius: 14px;
+    }
+
+    .course-info {
+        padding: 9px 7px 11px;
+    }
+
+    .course-info h3 {
+        font-size: 9px;
+    }
+
+    .benefit-card {
+        min-height: 220px;
+
+        padding: 20px 14px;
+    }
+
+    .benefit-card h3 {
+        font-size: 16px;
+    }
+
+    .benefit-card p {
+        font-size: 13px;
+    }
+
+    .impact h2 {
+        font-size: 38px;
+    }
+
+    .sticky-price {
+        min-width: 76px;
+    }
+
+    .sticky-price strong {
+        font-size: 20px;
+    }
+
+    .sticky-buy > a {
+        font-size: 10px;
+    }
+}
