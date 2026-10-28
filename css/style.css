@@ -1,0 +1,1188 @@
+/* ==================================================
+   VENDA DIGITAL
+   STYLE.CSS
+================================================== */
+
+/* ==================================================
+   RESET
+================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #050505;
+    color: #ffffff;
+    line-height: 1.5;
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* ==================================================
+   VARIÁVEIS
+================================================== */
+
+:root {
+    --black: #050505;
+    --dark: #090909;
+    --dark-2: #111111;
+    --card: #121212;
+    --green: #20ff4b;
+    --green-dark: #0bbd31;
+    --white: #ffffff;
+    --gray: #a5a5a5;
+    --red: #ff3030;
+    --yellow: #ffc400;
+}
+
+/* ==================================================
+   CONTAINER
+================================================== */
+
+.container {
+    width: 92%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ==================================================
+   HEADER
+================================================== */
+
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    background: rgba(5, 5, 5, 0.94);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(15px);
+}
+
+.nav {
+    min-height: 78px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+}
+
+.logo {
+    width: 145px;
+    height: auto;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.menu a {
+    font-size: 14px;
+    font-weight: 700;
+    color: #d0d0d0;
+    transition: 0.3s;
+}
+
+.menu a:hover {
+    color: var(--green);
+}
+
+.menu-button {
+    padding: 13px 20px;
+    background: var(--green);
+    color: #000;
+    font-weight: 900;
+    font-size: 13px;
+    border-radius: 7px;
+    transition: 0.3s;
+}
+
+.menu-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(32, 255, 75, 0.25);
+}
+
+/* ==================================================
+   HERO
+================================================== */
+
+.hero {
+    position: relative;
+    padding: 90px 0 100px;
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 85% 30%,
+            rgba(32, 255, 75, 0.13),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 10% 80%,
+            rgba(32, 255, 75, 0.07),
+            transparent 25%
+        ),
+        #050505;
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    align-items: center;
+    gap: 70px;
+}
+
+.hero-content {
+    max-width: 700px;
+}
+
+.hero-label {
+    display: inline-block;
+    padding: 8px 14px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(32, 255, 75, 0.45);
+    background: rgba(32, 255, 75, 0.07);
+    color: var(--green);
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    border-radius: 30px;
+}
+
+.hero h1 {
+    font-size: clamp(42px, 6vw, 72px);
+    line-height: 0.98;
+    font-weight: 950;
+    letter-spacing: -3px;
+}
+
+.hero h1 span {
+    display: block;
+    color: var(--green);
+}
+
+.hero h2 {
+    margin-top: 24px;
+    font-size: clamp(22px, 3vw, 34px);
+    line-height: 1.15;
+    color: #dedede;
+}
+
+.hero h2 strong {
+    color: var(--white);
+}
+
+.hero-text {
+    margin-top: 22px;
+    max-width: 650px;
+    color: #bdbdbd;
+    font-size: 19px;
+}
+
+.hero-message {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 25px;
+    padding: 13px 17px;
+    background: #101810;
+    border-left: 3px solid var(--green);
+    color: #e7e7e7;
+    font-weight: 700;
+}
+
+.hero-message-icon {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    color: var(--green);
+}
+
+.hero-message-icon svg {
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.hero-message-text {
+    display: block;
+}
+
+.pack-title {
+    margin-top: 32px;
+    font-size: 28px;
+    line-height: 1.1;
+}
+
+.pack-title span {
+    color: var(--green);
+}
+
+.hero-description {
+    margin-top: 12px;
+    max-width: 600px;
+    color: var(--gray);
+}
+
+/* ==================================================
+   BOTÕES
+================================================== */
+
+.main-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 9px;
+    margin-top: 30px;
+    padding: 17px 28px;
+    background: var(--green);
+    color: #000;
+    font-size: 15px;
+    font-weight: 950;
+    border-radius: 8px;
+    box-shadow: 0 12px 35px rgba(32, 255, 75, 0.17);
+    transition: 0.3s;
+}
+
+.main-button:hover {
+    transform: translateY(-3px) scale(1.01);
+    box-shadow: 0 18px 45px rgba(32, 255, 75, 0.3);
+}
+
+.button-icon {
+    width: 19px;
+    height: 19px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button-icon svg {
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* ==================================================
+   OFFER CARD
+================================================== */
+
+.offer-card {
+    position: relative;
+    padding: 35px 30px;
+    background: linear-gradient(145deg, #181818, #080808);
+    border: 1px solid rgba(32, 255, 75, 0.3);
+    border-radius: 18px;
+    text-align: center;
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.5),
+        0 0 50px rgba(32, 255, 75, 0.05);
+}
+
+.offer-card::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: 18px;
+    pointer-events: none;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.offer-top {
+    display: inline-block;
+    padding: 7px 15px;
+    background: var(--red);
+    color: white;
+    border-radius: 30px;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+.offer-old {
+    margin-top: 28px;
+    color: #777;
+    font-size: 16px;
+}
+
+.offer-price {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 5px;
+    margin-top: 5px;
+}
+
+.offer-price small {
+    align-self: flex-start;
+    margin-top: 18px;
+    color: #aaa;
+    font-weight: 800;
+}
+
+.offer-price strong {
+    font-size: 95px;
+    line-height: 0.9;
+    color: var(--green);
+    letter-spacing: -6px;
+}
+
+.offer-price span {
+    margin-bottom: 5px;
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--green);
+}
+
+.offer-discount {
+    margin-top: 18px;
+    color: white;
+    font-weight: 900;
+    font-size: 13px;
+}
+
+.offer-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 9px;
+    width: 100%;
+    margin-top: 25px;
+    padding: 17px;
+    background: var(--green);
+    color: #000;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 950;
+    transition: 0.3s;
+}
+
+.offer-button:hover {
+    transform: translateY(-3px);
+}
+
+.payment {
+    margin-top: 18px;
+    color: #aaa;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.payment > span:last-child {
+    color: #777;
+}
+
+.payment-check {
+    display: inline-flex;
+    width: 17px;
+    height: 17px;
+    margin-right: 4px;
+    vertical-align: middle;
+    color: var(--green);
+}
+
+.payment-check svg {
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* ==================================================
+   BENEFÍCIOS
+================================================== */
+
+.benefits {
+    padding: 55px 0;
+    background: #0b0b0b;
+    border-top: 1px solid #161616;
+    border-bottom: 1px solid #161616;
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.benefit {
+    text-align: center;
+    padding: 20px;
+}
+
+.benefit-icon {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    color: var(--green);
+}
+
+.benefit-icon svg {
+    width: 42px;
+    height: 42px;
+    display: block;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    background: transparent;
+}
+
+.benefit h3 {
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.benefit p {
+    color: #888;
+    font-size: 13px;
+}
+
+/* ==================================================
+   SECTION HEADINGS
+================================================== */
+
+.section-heading {
+    text-align: center;
+    margin-bottom: 55px;
+}
+
+.section-heading span {
+    color: var(--green);
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+.section-heading h2 {
+    margin-top: 10px;
+    font-size: clamp(32px, 5vw, 52px);
+    line-height: 1;
+}
+
+.section-heading h2 strong {
+    color: var(--green);
+}
+
+.section-heading p {
+    margin-top: 14px;
+    color: #888;
+}
+
+/* ==================================================
+   CURSOS
+================================================== */
+
+.courses-section {
+    padding: 100px 0;
+    background: #050505;
+}
+
+/*
+   SEMPRE 3 COLUNAS
+   PC:       3 / 3 / 1
+   TABLET:   3 / 3 / 1
+   CELULAR:  3 / 3 / 1
+*/
+
+.courses-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 30px;
+}
+
+.course-card {
+    min-width: 0;
+    overflow: hidden;
+    background: #0e0e0e;
+    border: 1px solid #202020;
+    border-radius: 13px;
+    transition: 0.35s;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.course-card.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.course-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(32, 255, 75, 0.4);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+
+.course-card:nth-child(7) {
+    grid-column: 2;
+}
+
+.course-card img {
+    width: 100%;
+    height: 430px;
+    object-fit: contain;
+    background: #080808;
+}
+
+.course-info {
+    padding: 20px;
+}
+
+.course-info h3 {
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+
+.course-info p {
+    color: #888;
+    font-size: 14px;
+}
+
+/* ==================================================
+   IMPACT
+================================================== */
+
+.impact {
+    padding: 90px 0;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(32, 255, 75, 0.08),
+            transparent 40%
+        ),
+        #090909;
+}
+
+.impact-box {
+    max-width: 900px;
+    margin: auto;
+    padding: 60px 30px;
+    text-align: center;
+    border: 1px solid #222;
+    border-radius: 18px;
+    background: #0d0d0d;
+}
+
+.impact-box span {
+    font-size: 11px;
+    letter-spacing: 2px;
+    font-weight: 900;
+    color: #888;
+}
+
+.impact-box h2 {
+    margin-top: 18px;
+    font-size: clamp(30px, 5vw, 52px);
+    line-height: 1.05;
+}
+
+.impact-box h2 strong {
+    color: var(--green);
+}
+
+.impact-box p {
+    margin-top: 18px;
+    color: #999;
+    font-size: 17px;
+}
+
+/* ==================================================
+   BÔNUS
+================================================== */
+
+.bonus {
+    padding: 100px 0;
+    background: #050505;
+}
+
+.bonus-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.bonus-card {
+    padding: 30px 22px;
+    text-align: center;
+    background: #101010;
+    border: 1px solid #222;
+    border-radius: 12px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: 0.35s;
+}
+
+.bonus-card.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.bonus-card:hover {
+    border-color: rgba(32, 255, 75, 0.35);
+    transform: translateY(-5px);
+}
+
+.bonus-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px;
+    color: var(--green);
+}
+
+.bonus-icon svg {
+    width: 42px;
+    height: 42px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.bonus-card h3 {
+    font-size: 17px;
+}
+
+.bonus-card p {
+    margin-top: 8px;
+    color: #888;
+    font-size: 13px;
+}
+
+/* ==================================================
+   DEPOIMENTOS
+================================================== */
+
+.testimonials {
+    padding: 100px 0;
+    background: #0a0a0a;
+}
+
+.testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+.testimonial {
+    padding: 30px;
+    background: #111;
+    border: 1px solid #222;
+    border-radius: 12px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: 0.35s;
+}
+
+.testimonial.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.stars {
+    color: var(--yellow);
+    letter-spacing: 3px;
+    margin-bottom: 18px;
+    font-size: 16px;
+}
+
+.testimonial p {
+    color: #bbb;
+    font-size: 14px;
+    font-style: italic;
+}
+
+.testimonial strong {
+    display: block;
+    margin-top: 20px;
+    font-size: 13px;
+}
+
+/* ==================================================
+   CTA FINAL
+================================================== */
+
+.final-cta {
+    padding: 110px 0;
+    text-align: center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(32, 255, 75, 0.14),
+            transparent 45%
+        ),
+        #050505;
+}
+
+.final-cta > .container > span {
+    color: var(--green);
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+.final-cta h2 {
+    margin-top: 15px;
+    font-size: clamp(40px, 6vw, 70px);
+    line-height: 1;
+}
+
+.final-cta h2 strong {
+    color: var(--green);
+}
+
+.final-cta p {
+    max-width: 650px;
+    margin: 20px auto 0;
+    color: #999;
+    font-size: 17px;
+}
+
+.final-cta .main-button {
+    margin-top: 30px;
+}
+
+.secure-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    margin-top: 15px;
+    color: #777;
+}
+
+.secure-icon {
+    width: 16px;
+    height: 16px;
+    display: inline-flex;
+    color: var(--green);
+}
+
+.secure-icon svg {
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* ==================================================
+   FOOTER
+================================================== */
+
+footer {
+    padding: 45px 0;
+    background: #020202;
+    border-top: 1px solid #151515;
+    text-align: center;
+}
+
+footer img {
+    width: 130px;
+    margin: 0 auto 15px;
+}
+
+footer p {
+    color: #666;
+    font-size: 12px;
+}
+
+/* ==================================================
+   WHATSAPP
+================================================== */
+
+.whatsapp {
+    position: fixed;
+    right: 22px;
+    bottom: 22px;
+    z-index: 9999;
+
+    width: 58px;
+    height: 58px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50%;
+
+    background: #25D366;
+    color: white;
+
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+
+    transition: 0.3s;
+}
+
+.whatsapp:hover {
+    transform: scale(1.1);
+}
+
+.whatsapp svg {
+    width: 32px;
+    height: 32px;
+    fill: currentColor;
+}
+
+/* ==================================================
+   RESPONSIVIDADE
+================================================== */
+
+@media (max-width: 950px) {
+
+    .menu {
+        display: none;
+    }
+
+    .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+
+    .hero-content {
+        text-align: center;
+        margin: auto;
+    }
+
+    .hero-message {
+        justify-content: center;
+    }
+
+    .hero-description {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /*
+       IMPORTANTE:
+       Os cursos continuam 3 por linha.
+    */
+    .courses-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+    }
+
+    .benefits-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .bonus-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ==================================================
+   CELULAR
+================================================== */
+
+@media (max-width: 600px) {
+
+    .container {
+        width: 94%;
+    }
+
+    .nav {
+        min-height: 68px;
+    }
+
+    .logo {
+        width: 120px;
+    }
+
+    .menu-button {
+        padding: 10px 13px;
+        font-size: 10px;
+    }
+
+    .hero {
+        padding: 65px 0 70px;
+    }
+
+    .hero h1 {
+        font-size: 45px;
+        letter-spacing: -2px;
+    }
+
+    .hero h2 {
+        font-size: 23px;
+    }
+
+    .hero-text {
+        font-size: 16px;
+    }
+
+    .hero-message {
+        font-size: 13px;
+        text-align: left;
+    }
+
+    .pack-title {
+        font-size: 23px;
+    }
+
+    .main-button {
+        width: 100%;
+        font-size: 14px;
+        padding: 16px 15px;
+    }
+
+    .offer-card {
+        padding: 30px 20px;
+    }
+
+    .offer-price strong {
+        font-size: 80px;
+    }
+
+    /* BENEFÍCIOS */
+
+    .benefits-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 5px;
+    }
+
+    .benefit {
+        padding: 15px 5px;
+    }
+
+    .benefit-icon {
+        width: 48px;
+        height: 48px;
+        margin-bottom: 12px;
+    }
+
+    .benefit-icon svg {
+        width: 38px;
+        height: 38px;
+    }
+
+    .benefit h3 {
+        font-size: 11px;
+    }
+
+    .benefit p {
+        font-size: 11px;
+    }
+
+    /* ==================================================
+       CURSOS — 3 / 3 / 1 NO CELULAR
+    ================================================== */
+
+    .courses-section,
+    .bonus,
+    .testimonials {
+        padding: 75px 0;
+    }
+
+    .courses-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px;
+    }
+
+    .course-card {
+        border-radius: 8px;
+    }
+
+    .course-card:nth-child(7) {
+        grid-column: 2;
+    }
+
+    .course-card img {
+        width: 100%;
+        height: 170px;
+        object-fit: contain;
+        background: #080808;
+    }
+
+    .course-info {
+        padding: 10px 7px;
+    }
+
+    .course-info h3 {
+        font-size: 12px;
+        line-height: 1.15;
+        margin-bottom: 5px;
+    }
+
+    .course-info p {
+        font-size: 9px;
+        line-height: 1.35;
+    }
+
+    /* BÔNUS */
+
+    .bonus-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .bonus-card {
+        padding: 25px 12px;
+    }
+
+    .bonus-icon {
+        width: 42px;
+        height: 42px;
+    }
+
+    .bonus-icon svg {
+        width: 36px;
+        height: 36px;
+    }
+
+    .bonus-card h3 {
+        font-size: 14px;
+    }
+
+    /* DEPOIMENTOS */
+
+    .testimonial-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* IMPACT */
+
+    .impact {
+        padding: 70px 0;
+    }
+
+    .impact-box {
+        padding: 45px 20px;
+    }
+
+    .impact-box h2 {
+        font-size: 34px;
+    }
+
+    /* CTA */
+
+    .final-cta {
+        padding: 80px 0;
+    }
+
+    .final-cta h2 {
+        font-size: 43px;
+    }
+
+    /* WHATSAPP */
+
+    .whatsapp {
+        right: 17px;
+        bottom: 17px;
+        width: 55px;
+        height: 55px;
+    }
+
+    .whatsapp svg {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+/* ==================================================
+   PEQUENOS TELEFONES
+================================================== */
+
+@media (max-width: 380px) {
+
+    .hero h1 {
+        font-size: 38px;
+    }
+
+    .hero h2 {
+        font-size: 20px;
+    }
+
+    .offer-price strong {
+        font-size: 68px;
+    }
+
+    .offer-price span {
+        font-size: 22px;
+    }
+
+    .benefits-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .bonus-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /*
+       Continua 3 / 3 / 1
+       mesmo nos telefones pequenos.
+    */
+
+    .courses-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 6px;
+    }
+
+    .course-card:nth-child(7) {
+        grid-column: 2;
+    }
+
+    .course-card img {
+        height: 145px;
+    }
+
+    .course-info {
+        padding: 8px 5px;
+    }
+
+    .course-info h3 {
+        font-size: 10px;
+    }
+
+    .course-info p {
+        font-size: 8px;
+    }
+}
